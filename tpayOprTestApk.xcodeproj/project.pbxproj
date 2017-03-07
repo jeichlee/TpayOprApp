@@ -19,6 +19,7 @@
 		EFC9C4421E6EEA66006378CD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EFC9C4411E6EEA66006378CD /* Main.storyboard */; };
 		EFC9C4441E6EEC90006378CD /* tpay로고.png in Resources */ = {isa = PBXBuildFile; fileRef = EFC9C4431E6EEC90006378CD /* tpay로고.png */; };
 		EFC9C4471E6EEE33006378CD /* LoadingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EFC9C4461E6EEE33006378CD /* LoadingViewController.m */; };
+		EFC9C44A1E6F0FBD006378CD /* 스마트청구서.png in Resources */ = {isa = PBXBuildFile; fileRef = EFC9C4491E6F0FBD006378CD /* 스마트청구서.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -43,6 +44,7 @@
 		EFC9C4431E6EEC90006378CD /* tpay로고.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tpay로고.png"; sourceTree = "<group>"; };
 		EFC9C4451E6EEE33006378CD /* LoadingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoadingViewController.h; sourceTree = "<group>"; };
 		EFC9C4461E6EEE33006378CD /* LoadingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoadingViewController.m; sourceTree = "<group>"; };
+		EFC9C4491E6F0FBD006378CD /* 스마트청구서.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "스마트청구서.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -148,6 +150,7 @@
 		EFC9C4481E6F0B92006378CD /* resource */ = {
 			isa = PBXGroup;
 			children = (
+				EFC9C4491E6F0FBD006378CD /* 스마트청구서.png */,
 				EFC9C4431E6EEC90006378CD /* tpay로고.png */,
 				EFC9C42A1E6ED997006378CD /* Info.plist */,
 				EFC9C4251E6ED997006378CD /* Assets.xcassets */,
@@ -215,6 +218,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EFC9C4441E6EEC90006378CD /* tpay로고.png in Resources */,
+				EFC9C44A1E6F0FBD006378CD /* 스마트청구서.png in Resources */,
 				EFC9C4421E6EEA66006378CD /* Main.storyboard in Resources */,
 				EFC9C4291E6ED997006378CD /* LaunchScreen.storyboard in Resources */,
 				EFC9C4261E6ED997006378CD /* Assets.xcassets in Resources */,
