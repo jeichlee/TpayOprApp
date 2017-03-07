@@ -9,11 +9,16 @@
 /* Begin PBXBuildFile section */
 		EFC9C4181E6ED997006378CD /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = EFC9C4171E6ED997006378CD /* main.m */; };
 		EFC9C41B1E6ED997006378CD /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = EFC9C41A1E6ED997006378CD /* AppDelegate.m */; };
-		EFC9C41E1E6ED997006378CD /* FirstViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EFC9C41D1E6ED997006378CD /* FirstViewController.m */; };
-		EFC9C4211E6ED997006378CD /* SecondViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EFC9C4201E6ED997006378CD /* SecondViewController.m */; };
-		EFC9C4241E6ED997006378CD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EFC9C4221E6ED997006378CD /* Main.storyboard */; };
+		EFC9C41E1E6ED997006378CD /* AppTestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EFC9C41D1E6ED997006378CD /* AppTestViewController.m */; };
+		EFC9C4211E6ED997006378CD /* PayTestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EFC9C4201E6ED997006378CD /* PayTestViewController.m */; };
 		EFC9C4261E6ED997006378CD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EFC9C4251E6ED997006378CD /* Assets.xcassets */; };
 		EFC9C4291E6ED997006378CD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EFC9C4271E6ED997006378CD /* LaunchScreen.storyboard */; };
+		EFC9C4361E6EDF8A006378CD /* NSString+Utilities.m in Sources */ = {isa = PBXBuildFile; fileRef = EFC9C4351E6EDF8A006378CD /* NSString+Utilities.m */; };
+		EFC9C43D1E6EE935006378CD /* OprCheckViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EFC9C43C1E6EE935006378CD /* OprCheckViewController.m */; };
+		EFC9C4401E6EE95A006378CD /* ContactViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EFC9C43F1E6EE95A006378CD /* ContactViewController.m */; };
+		EFC9C4421E6EEA66006378CD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EFC9C4411E6EEA66006378CD /* Main.storyboard */; };
+		EFC9C4441E6EEC90006378CD /* tpay로고.png in Resources */ = {isa = PBXBuildFile; fileRef = EFC9C4431E6EEC90006378CD /* tpay로고.png */; };
+		EFC9C4471E6EEE33006378CD /* LoadingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EFC9C4461E6EEE33006378CD /* LoadingViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -21,14 +26,23 @@
 		EFC9C4171E6ED997006378CD /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		EFC9C4191E6ED997006378CD /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		EFC9C41A1E6ED997006378CD /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		EFC9C41C1E6ED997006378CD /* FirstViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FirstViewController.h; sourceTree = "<group>"; };
-		EFC9C41D1E6ED997006378CD /* FirstViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FirstViewController.m; sourceTree = "<group>"; };
-		EFC9C41F1E6ED997006378CD /* SecondViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SecondViewController.h; sourceTree = "<group>"; };
-		EFC9C4201E6ED997006378CD /* SecondViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SecondViewController.m; sourceTree = "<group>"; };
-		EFC9C4231E6ED997006378CD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		EFC9C41C1E6ED997006378CD /* AppTestViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppTestViewController.h; sourceTree = "<group>"; };
+		EFC9C41D1E6ED997006378CD /* AppTestViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppTestViewController.m; sourceTree = "<group>"; };
+		EFC9C41F1E6ED997006378CD /* PayTestViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PayTestViewController.h; sourceTree = "<group>"; };
+		EFC9C4201E6ED997006378CD /* PayTestViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PayTestViewController.m; sourceTree = "<group>"; };
 		EFC9C4251E6ED997006378CD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		EFC9C4281E6ED997006378CD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		EFC9C42A1E6ED997006378CD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		EFC9C4341E6EDF8A006378CD /* NSString+Utilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Utilities.h"; sourceTree = "<group>"; };
+		EFC9C4351E6EDF8A006378CD /* NSString+Utilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Utilities.m"; sourceTree = "<group>"; };
+		EFC9C43B1E6EE935006378CD /* OprCheckViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OprCheckViewController.h; sourceTree = "<group>"; };
+		EFC9C43C1E6EE935006378CD /* OprCheckViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OprCheckViewController.m; sourceTree = "<group>"; };
+		EFC9C43E1E6EE95A006378CD /* ContactViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactViewController.h; sourceTree = "<group>"; };
+		EFC9C43F1E6EE95A006378CD /* ContactViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactViewController.m; sourceTree = "<group>"; };
+		EFC9C4411E6EEA66006378CD /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		EFC9C4431E6EEC90006378CD /* tpay로고.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tpay로고.png"; sourceTree = "<group>"; };
+		EFC9C4451E6EEE33006378CD /* LoadingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoadingViewController.h; sourceTree = "<group>"; };
+		EFC9C4461E6EEE33006378CD /* LoadingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoadingViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,16 +75,9 @@
 		EFC9C4151E6ED997006378CD /* tpayOprTestApk */ = {
 			isa = PBXGroup;
 			children = (
-				EFC9C4191E6ED997006378CD /* AppDelegate.h */,
-				EFC9C41A1E6ED997006378CD /* AppDelegate.m */,
-				EFC9C41C1E6ED997006378CD /* FirstViewController.h */,
-				EFC9C41D1E6ED997006378CD /* FirstViewController.m */,
-				EFC9C41F1E6ED997006378CD /* SecondViewController.h */,
-				EFC9C4201E6ED997006378CD /* SecondViewController.m */,
-				EFC9C4221E6ED997006378CD /* Main.storyboard */,
-				EFC9C4251E6ED997006378CD /* Assets.xcassets */,
-				EFC9C4271E6ED997006378CD /* LaunchScreen.storyboard */,
-				EFC9C42A1E6ED997006378CD /* Info.plist */,
+				EFC9C43A1E6EE18C006378CD /* ViewController */,
+				EFC9C4391E6EE161006378CD /* Delegate */,
+				EFC9C4301E6EDF1B006378CD /* CommonCategory */,
 				EFC9C4161E6ED997006378CD /* Supporting Files */,
 			);
 			path = tpayOprTestApk;
@@ -79,9 +86,65 @@
 		EFC9C4161E6ED997006378CD /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				EFC9C4431E6EEC90006378CD /* tpay로고.png */,
+				EFC9C42A1E6ED997006378CD /* Info.plist */,
+				EFC9C4251E6ED997006378CD /* Assets.xcassets */,
+				EFC9C4271E6ED997006378CD /* LaunchScreen.storyboard */,
 				EFC9C4171E6ED997006378CD /* main.m */,
+				EFC9C4411E6EEA66006378CD /* Main.storyboard */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		EFC9C4301E6EDF1B006378CD /* CommonCategory */ = {
+			isa = PBXGroup;
+			children = (
+				EFC9C4381E6EE10A006378CD /* ConnUtil */,
+				EFC9C4371E6EE0F1006378CD /* StringUtil */,
+			);
+			name = CommonCategory;
+			sourceTree = "<group>";
+		};
+		EFC9C4371E6EE0F1006378CD /* StringUtil */ = {
+			isa = PBXGroup;
+			children = (
+				EFC9C4341E6EDF8A006378CD /* NSString+Utilities.h */,
+				EFC9C4351E6EDF8A006378CD /* NSString+Utilities.m */,
+			);
+			name = StringUtil;
+			sourceTree = "<group>";
+		};
+		EFC9C4381E6EE10A006378CD /* ConnUtil */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = ConnUtil;
+			sourceTree = "<group>";
+		};
+		EFC9C4391E6EE161006378CD /* Delegate */ = {
+			isa = PBXGroup;
+			children = (
+				EFC9C4191E6ED997006378CD /* AppDelegate.h */,
+				EFC9C41A1E6ED997006378CD /* AppDelegate.m */,
+			);
+			name = Delegate;
+			sourceTree = "<group>";
+		};
+		EFC9C43A1E6EE18C006378CD /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				EFC9C41C1E6ED997006378CD /* AppTestViewController.h */,
+				EFC9C41D1E6ED997006378CD /* AppTestViewController.m */,
+				EFC9C41F1E6ED997006378CD /* PayTestViewController.h */,
+				EFC9C4201E6ED997006378CD /* PayTestViewController.m */,
+				EFC9C43B1E6EE935006378CD /* OprCheckViewController.h */,
+				EFC9C43C1E6EE935006378CD /* OprCheckViewController.m */,
+				EFC9C43E1E6EE95A006378CD /* ContactViewController.h */,
+				EFC9C43F1E6EE95A006378CD /* ContactViewController.m */,
+				EFC9C4451E6EEE33006378CD /* LoadingViewController.h */,
+				EFC9C4461E6EEE33006378CD /* LoadingViewController.m */,
+			);
+			name = ViewController;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -143,9 +206,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EFC9C4441E6EEC90006378CD /* tpay로고.png in Resources */,
+				EFC9C4421E6EEA66006378CD /* Main.storyboard in Resources */,
 				EFC9C4291E6ED997006378CD /* LaunchScreen.storyboard in Resources */,
 				EFC9C4261E6ED997006378CD /* Assets.xcassets in Resources */,
-				EFC9C4241E6ED997006378CD /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -156,24 +220,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EFC9C4211E6ED997006378CD /* SecondViewController.m in Sources */,
+				EFC9C4401E6EE95A006378CD /* ContactViewController.m in Sources */,
+				EFC9C4361E6EDF8A006378CD /* NSString+Utilities.m in Sources */,
+				EFC9C43D1E6EE935006378CD /* OprCheckViewController.m in Sources */,
+				EFC9C4211E6ED997006378CD /* PayTestViewController.m in Sources */,
 				EFC9C41B1E6ED997006378CD /* AppDelegate.m in Sources */,
-				EFC9C41E1E6ED997006378CD /* FirstViewController.m in Sources */,
+				EFC9C41E1E6ED997006378CD /* AppTestViewController.m in Sources */,
 				EFC9C4181E6ED997006378CD /* main.m in Sources */,
+				EFC9C4471E6EEE33006378CD /* LoadingViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		EFC9C4221E6ED997006378CD /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				EFC9C4231E6ED997006378CD /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		EFC9C4271E6ED997006378CD /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -316,6 +376,7 @@
 				EFC9C42F1E6ED997006378CD /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

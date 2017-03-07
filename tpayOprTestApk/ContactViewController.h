@@ -1,5 +1,5 @@
 //
-//  FirstViewController.h
+//  ContactViewController.h
 //  tpayOprTestApk
 //
 //  Created by jeichlee on 2017. 3. 7..
@@ -8,8 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface FirstViewController : UIViewController
-
+@interface ContactViewController : UIViewController
 
 @end
-

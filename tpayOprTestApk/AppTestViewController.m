@@ -6,17 +6,18 @@
 //  Copyright © 2017년 jeichlee. All rights reserved.
 //
 
-#import "FirstViewController.h"
+#import "AppTestViewController.h"
 
-@interface FirstViewController ()
+@interface AppTestViewController ()
 
 @end
 
-@implementation FirstViewController
+@implementation AppTestViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
+    NSLog(@"AppTestViewController Load");
 }
 
 

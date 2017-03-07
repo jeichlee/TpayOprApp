@@ -6,17 +6,18 @@
 //  Copyright © 2017년 jeichlee. All rights reserved.
 //
 
-#import "SecondViewController.h"
+#import "PayTestViewController.h"
 
-@interface SecondViewController ()
+@interface PayTestViewController ()
 
 @end
 
-@implementation SecondViewController
+@implementation PayTestViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
+    NSLog(@"PayTestViewController Load");
 }
 
 
