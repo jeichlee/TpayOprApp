@@ -75,6 +75,7 @@
 		EFC9C4151E6ED997006378CD /* tpayOprTestApk */ = {
 			isa = PBXGroup;
 			children = (
+				EFC9C4171E6ED997006378CD /* main.m */,
 				EFC9C43A1E6EE18C006378CD /* ViewController */,
 				EFC9C4391E6EE161006378CD /* Delegate */,
 				EFC9C4301E6EDF1B006378CD /* CommonCategory */,
@@ -86,11 +87,8 @@
 		EFC9C4161E6ED997006378CD /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				EFC9C4431E6EEC90006378CD /* tpay로고.png */,
-				EFC9C42A1E6ED997006378CD /* Info.plist */,
-				EFC9C4251E6ED997006378CD /* Assets.xcassets */,
+				EFC9C4481E6F0B92006378CD /* resource */,
 				EFC9C4271E6ED997006378CD /* LaunchScreen.storyboard */,
-				EFC9C4171E6ED997006378CD /* main.m */,
 				EFC9C4411E6EEA66006378CD /* Main.storyboard */,
 			);
 			name = "Supporting Files";
@@ -145,6 +143,16 @@
 				EFC9C4461E6EEE33006378CD /* LoadingViewController.m */,
 			);
 			name = ViewController;
+			sourceTree = "<group>";
+		};
+		EFC9C4481E6F0B92006378CD /* resource */ = {
+			isa = PBXGroup;
+			children = (
+				EFC9C4431E6EEC90006378CD /* tpay로고.png */,
+				EFC9C42A1E6ED997006378CD /* Info.plist */,
+				EFC9C4251E6ED997006378CD /* Assets.xcassets */,
+			);
+			name = resource;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
