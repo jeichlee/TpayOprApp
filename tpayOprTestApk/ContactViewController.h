@@ -7,7 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <DownPicker.h>
 
 @interface ContactViewController : UIViewController
+
+@property(strong, nonatomic) IBOutlet UITextField *selector;
+@property(strong, nonatomic) DownPicker *dp;
+@property (weak, nonatomic) IBOutlet UILabel *label1;
+
+- (IBAction)changeAPI:(id)sender;
 
 @end
