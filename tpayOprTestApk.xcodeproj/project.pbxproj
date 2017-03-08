@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		62F8B55F1E6FC68F00EA70F3 /* NSData+AESCrypt.m in Sources */ = {isa = PBXBuildFile; fileRef = 62F8B55E1E6FC68F00EA70F3 /* NSData+AESCrypt.m */; };
 		62F8B7711E6FDC2100EA70F3 /* libnFilter.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 62F8B7051E6FDC2100EA70F3 /* libnFilter.a */; };
 		62F8B7721E6FDC2100EA70F3 /* libNSafer.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 62F8B7061E6FDC2100EA70F3 /* libNSafer.a */; };
 		62F8B7731E6FDC2100EA70F3 /* emptynum1_NSHC.png in Resources */ = {isa = PBXBuildFile; fileRef = 62F8B71A1E6FDC2100EA70F3 /* emptynum1_NSHC.png */; };
@@ -93,6 +92,7 @@
 		62F8B7C31E6FDC2100EA70F3 /* tock.caf in Resources */ = {isa = PBXBuildFile; fileRef = 62F8B7701E6FDC2100EA70F3 /* tock.caf */; };
 		62F8B7C71E6FE5E000EA70F3 /* DownPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 62F8B7C61E6FE5E000EA70F3 /* DownPicker.m */; };
 		62F8B7CA1E6FE61E00EA70F3 /* UIDownPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 62F8B7C91E6FE61E00EA70F3 /* UIDownPicker.m */; };
+		62F8B7CD1E70024F00EA70F3 /* NSData+AESCrypt.m in Sources */ = {isa = PBXBuildFile; fileRef = 62F8B7CC1E70024F00EA70F3 /* NSData+AESCrypt.m */; };
 		EFC9C4181E6ED997006378CD /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = EFC9C4171E6ED997006378CD /* main.m */; };
 		EFC9C41B1E6ED997006378CD /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = EFC9C41A1E6ED997006378CD /* AppDelegate.m */; };
 		EFC9C41E1E6ED997006378CD /* AppTestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EFC9C41D1E6ED997006378CD /* AppTestViewController.m */; };
@@ -109,8 +109,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		62F8B55D1E6FC68F00EA70F3 /* NSData+AESCrypt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSData+AESCrypt.h"; path = "../../../Desktop/nFilter_iOS_5.4.8_nonbitcode/Sample/NFilterSample/NSData+AESCrypt.h"; sourceTree = "<group>"; };
-		62F8B55E1E6FC68F00EA70F3 /* NSData+AESCrypt.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSData+AESCrypt.m"; path = "../../../Desktop/nFilter_iOS_5.4.8_nonbitcode/Sample/NFilterSample/NSData+AESCrypt.m"; sourceTree = "<group>"; };
 		62F8B7041E6FDC2100EA70F3 /* EccEncryptor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EccEncryptor.h; sourceTree = "<group>"; };
 		62F8B7051E6FDC2100EA70F3 /* libnFilter.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libnFilter.a; sourceTree = "<group>"; };
 		62F8B7061E6FDC2100EA70F3 /* libNSafer.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libNSafer.a; sourceTree = "<group>"; };
@@ -215,6 +213,10 @@
 		62F8B7C61E6FE5E000EA70F3 /* DownPicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DownPicker.m; sourceTree = "<group>"; };
 		62F8B7C81E6FE60000EA70F3 /* UIDownPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIDownPicker.h; sourceTree = "<group>"; };
 		62F8B7C91E6FE61E00EA70F3 /* UIDownPicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIDownPicker.m; sourceTree = "<group>"; };
+		62F8B7CB1E70024F00EA70F3 /* NSData+AESCrypt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+AESCrypt.h"; sourceTree = "<group>"; };
+		62F8B7CC1E70024F00EA70F3 /* NSData+AESCrypt.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+AESCrypt.m"; sourceTree = "<group>"; };
+		62F8B7CE1E70028100EA70F3 /* aes_mod.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = aes_mod.h; sourceTree = "<group>"; };
+		62F8B7CF1E70029F00EA70F3 /* ns_api.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ns_api.h; sourceTree = "<group>"; };
 		EFC9C4131E6ED997006378CD /* tpayOprTestApk.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = tpayOprTestApk.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EFC9C4171E6ED997006378CD /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		EFC9C4191E6ED997006378CD /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -255,8 +257,10 @@
 		62F8B55C1E6FC67300EA70F3 /* NFilterUtil */ = {
 			isa = PBXGroup;
 			children = (
-				62F8B55D1E6FC68F00EA70F3 /* NSData+AESCrypt.h */,
-				62F8B55E1E6FC68F00EA70F3 /* NSData+AESCrypt.m */,
+				62F8B7CF1E70029F00EA70F3 /* ns_api.h */,
+				62F8B7CE1E70028100EA70F3 /* aes_mod.h */,
+				62F8B7CB1E70024F00EA70F3 /* NSData+AESCrypt.h */,
+				62F8B7CC1E70024F00EA70F3 /* NSData+AESCrypt.m */,
 			);
 			name = NFilterUtil;
 			sourceTree = "<group>";
@@ -710,7 +714,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EFC9C4401E6EE95A006378CD /* ContactViewController.m in Sources */,
-				62F8B55F1E6FC68F00EA70F3 /* NSData+AESCrypt.m in Sources */,
+				62F8B7CD1E70024F00EA70F3 /* NSData+AESCrypt.m in Sources */,
 				EFC9C4361E6EDF8A006378CD /* NSString+Utilities.m in Sources */,
 				EFC9C43D1E6EE935006378CD /* OprCheckViewController.m in Sources */,
 				EFC9C4211E6ED997006378CD /* PayTestViewController.m in Sources */,

@@ -14,7 +14,7 @@
 
 @implementation ContactViewController
 
-@synthesize selector, label1, dp;
+@synthesize selector, dp, container, api1;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -38,7 +38,9 @@
 - (IBAction)changeAPI:(id)sender {
     NSString *str = [dp getValueAtIndex:dp.selectedIndex];
     NSLog(@"%@", [@"changeAPI : " stringByAppendingString:str]);
-    label1.text = str;
+    
+    [container removeFromSuperview];
+    [container addSubview:api1];
 }
 
 - (void)didReceiveMemoryWarning {
