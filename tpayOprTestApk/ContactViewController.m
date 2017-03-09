@@ -14,10 +14,31 @@
 
 @implementation ContactViewController
 
+@synthesize selector, label1, dp;
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     NSLog(@"ContactViewController Load");
+    
+    NSMutableArray* bandArray = [[NSMutableArray alloc] init];
+    
+    // add some sample data
+    [bandArray addObject:@"Offsprings"];
+    [bandArray addObject:@"Radiohead"];
+    [bandArray addObject:@"Muse"];
+    [bandArray addObject:@"R.E.M."];
+    [bandArray addObject:@"The Killers"];
+    [bandArray addObject:@"Social Distortion"];
+    
+    dp = [[DownPicker alloc] initWithTextField:selector withData:bandArray];
+}
+
+// API 선택 변경시 event
+- (IBAction)changeAPI:(id)sender {
+    NSString *str = [dp getValueAtIndex:dp.selectedIndex];
+    NSLog(@"%@", [@"changeAPI : " stringByAppendingString:str]);
+    label1.text = str;
 }
 
 - (void)didReceiveMemoryWarning {
