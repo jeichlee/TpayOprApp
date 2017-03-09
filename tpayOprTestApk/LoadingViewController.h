@@ -11,7 +11,7 @@
 @interface LoadingViewController : UIViewController<NSURLConnectionDataDelegate>
 
 
-//@property (strong, nonatomic) IBOutlet UIProgressView *progressView;
+@property (strong, nonatomic) IBOutlet UIProgressView *progressView;
 
 
 

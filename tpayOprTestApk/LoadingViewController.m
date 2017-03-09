@@ -10,9 +10,9 @@
 
 @interface LoadingViewController ()
 
-//@property (strong, nonatomic) NSURLConnection *connectionManager;
-//@property (strong, nonatomic) NSMutableData *downloadedMutableData;
-//@property (strong, nonatomic) NSURLResponse *urlResponse;
+@property (strong, nonatomic) NSURLConnection *connectionManager;
+@property (strong, nonatomic) NSMutableData *downloadedMutableData;
+@property (strong, nonatomic) NSURLResponse *urlResponse;
 
 @end
 
@@ -20,23 +20,44 @@
 
 
 - (void)viewDidLoad {
-//    [super viewDidLoad];
-//    
-//    NSURLRequest *urlRequest = [NSURLRequest requestWithURL:[NSURL URLWithString:@"https://www.devfright.com/wp-content/uploads/2014/05/Phone4Wallpaper.jpg"]
-//                                                cachePolicy:NSURLRequestReloadIgnoringLocalCacheData timeoutInterval:60.0];
+    [super viewDidLoad];
+    
+    
+    NSURLRequest *urlRequest = [NSURLRequest requestWithURL:[NSURL URLWithString:@"https://www.devfright.com/wp-content/uploads/2014/05/Phone4Wallpaper.jpg"] cachePolicy:NSURLRequestReloadIgnoringLocalCacheData timeoutInterval:60.0];
+    
+    self.connectionManager = [[NSURLConnection alloc] initWithRequest:urlRequest delegate:self];
+    
+    self.downloadedMutableData = [[NSMutableData alloc]init];
+    
 }
 
-//-(void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response {
-//    
-//}
-//
-//-(void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data {
-//    
-//}
-//
-//-(void)connectionDidFinishLoading:(NSURLConnection *)connection {
-//    
-//}
+-(void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response {
+    
+    NSLog(@"%lld", response.expectedContentLength);
+    self.urlResponse = response;
+    
+}
+
+-(void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data {
+    
+    [self.downloadedMutableData appendData:data];
+    self.progressView.progress = ((100.0/self.urlResponse.expectedContentLength)*self.downloadedMutableData.length)/100;
+    
+    if(self.progressView.progress == 1) {
+        self.progressView.hidden = YES;
+    } else {
+        self.progressView.hidden = NO;
+    }
+    
+    NSLog(@"%.0f%%", ((100.0/self.urlResponse.expectedContentLength)*self.downloadedMutableData.length));
+    
+}
+
+-(void)connectionDidFinishLoading:(NSURLConnection *)connection {
+    
+    NSLog(@"finished");
+    
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
