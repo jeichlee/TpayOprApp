@@ -7,6 +7,9 @@
 //
 
 #import "ContactViewController.h"
+#import "NSData+AESCrypt.h"
+#import "NFilterCommon.h"
+#import "ContactSelect1Controller.h"
 
 @interface ContactViewController ()
 
@@ -14,7 +17,7 @@
 
 @implementation ContactViewController
 
-@synthesize selector, label1, dp;
+@synthesize selector, dp, container;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -32,13 +35,28 @@
     [bandArray addObject:@"Social Distortion"];
     
     dp = [[DownPicker alloc] initWithTextField:selector withData:bandArray];
+    
+    // NFilter 암호화
+    NSData *aesData = [[NSData alloc] init];
+    NSString *password = @"1234";
+    
+    NSData *encData = [aesData NF_AES256EncryptWithKey:@"0123456789012345678901" iv:password AESMode:NFilterAESModeCBC];
+    
+    NSLog(@"%@", encData);
 }
 
 // API 선택 변경시 event
 - (IBAction)changeAPI:(id)sender {
     NSString *str = [dp getValueAtIndex:dp.selectedIndex];
     NSLog(@"%@", [@"changeAPI : " stringByAppendingString:str]);
-    label1.text = str;
+    
+    ContactSelect1Controller *select1 = [[ContactSelect1Controller alloc] init];
+    [select1 viewDidLoad];
+    UIView *api1 = [[UIView alloc] initWithFrame:self.container.frame];
+    [api1 addSubview:select1.view];
+    
+    [self.container addSubview:select1.view];
+    
 }
 
 - (void)didReceiveMemoryWarning {
