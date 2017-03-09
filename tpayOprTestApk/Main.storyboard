@@ -151,10 +151,6 @@
                                     </stackView>
                                 </subviews>
                             </stackView>
-                            <progressView opaque="NO" tag="7" contentMode="scaleToFill" verticalHuggingPriority="750" fixedFrame="YES" progress="0.29999999999999999" translatesAutoresizingMaskIntoConstraints="NO" id="X1v-sj-26o">
-                                <rect key="frame" x="67" y="557" width="240" height="2"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </progressView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="인가된 사용자여부를 체크하고 있습니다" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LRe-y4-MeC">
                                 <rect key="frame" x="56" y="407" width="264" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -170,16 +166,17 @@
                                     <segue destination="f0r-Dk-Bdi" kind="presentation" id="cv9-pa-Em8"/>
                                 </connections>
                             </button>
+                            <progressView opaque="NO" tag="7" contentMode="scaleToFill" verticalHuggingPriority="750" fixedFrame="YES" progress="0.29999999999999999" translatesAutoresizingMaskIntoConstraints="NO" id="X1v-sj-26o">
+                                <rect key="frame" x="80" y="583" width="240" height="2"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </progressView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <connections>
-                        <outlet property="progressBar" destination="X1v-sj-26o" id="KcA-MY-Tad"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Rja-zW-ouN" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1914.4000000000001" y="-269.41529235382313"/>
+            <point key="canvasLocation" x="-1914" y="-278"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="g22-Cc-hwe">

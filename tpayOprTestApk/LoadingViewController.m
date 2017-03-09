@@ -10,26 +10,43 @@
 
 @interface LoadingViewController ()
 
+//@property (strong, nonatomic) NSURLConnection *connectionManager;
+//@property (strong, nonatomic) NSMutableData *downloadedMutableData;
+//@property (strong, nonatomic) NSURLResponse *urlResponse;
+
 @end
 
 @implementation LoadingViewController
 
-@synthesize progressBar;
 
 - (void)viewDidLoad {
-    [super viewDidLoad];
-    // Do any additional setup after loading the view.
+//    [super viewDidLoad];
+//    
+//    NSURLRequest *urlRequest = [NSURLRequest requestWithURL:[NSURL URLWithString:@"https://www.devfright.com/wp-content/uploads/2014/05/Phone4Wallpaper.jpg"]
+//                                                cachePolicy:NSURLRequestReloadIgnoringLocalCacheData timeoutInterval:60.0];
 }
+
+//-(void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response {
+//    
+//}
+//
+//-(void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data {
+//    
+//}
+//
+//-(void)connectionDidFinishLoading:(NSURLConnection *)connection {
+//    
+//}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 
--(IBAction)controlProgress:(id)sender
-{
-    
-}
+
+
+
+
 
 /*
 #pragma mark - Navigation
