@@ -14,8 +14,7 @@
 @property(strong, nonatomic) IBOutlet UITextField *selector;
 @property(strong, nonatomic) DownPicker *dp;
 
-@property (weak, nonatomic) IBOutlet UIView *container;
-@property (strong, nonatomic) IBOutlet UIView *api1;
+@property (strong, nonatomic) IBOutlet UIView *container;
 
 - (IBAction)changeAPI:(id)sender;
 
