@@ -8,10 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
-@interface LoadingViewController : UIViewController
+@interface LoadingViewController : UIViewController<NSURLConnectionDataDelegate>
 
-@property IBOutlet UIProgressView *progressBar;
 
--(IBAction)controlProgress:(id)sender;
+@property (strong, nonatomic) IBOutlet UIProgressView *progressView;
+
+
 
 @end
