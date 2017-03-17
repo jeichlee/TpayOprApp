@@ -7,11 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "HTTPClient.h"
 
-@interface LoadingViewController : UIViewController<NSURLConnectionDataDelegate>
+@interface LoadingViewController : UIViewController<HTTPClientDelegate>
 
 
 @property (strong, nonatomic) IBOutlet UIProgressView *progressView;
+@property (strong, nonatomic) IBOutlet UIButton *btnNext;
+
 
 
 

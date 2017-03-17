@@ -7,6 +7,9 @@
 //
 
 #import "LoadingViewController.h"
+#import "AppTestViewController.h"
+#import "AFNetworking.h"
+#import "HTTPClient.h"
 
 @interface LoadingViewController ()
 
@@ -19,64 +22,75 @@
 @implementation LoadingViewController
 
 
+
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    
-    NSURLRequest *urlRequest = [NSURLRequest requestWithURL:[NSURL URLWithString:@"https://www.devfright.com/wp-content/uploads/2014/05/Phone4Wallpaper.jpg"] cachePolicy:NSURLRequestReloadIgnoringLocalCacheData timeoutInterval:60.0];
-    
-    self.connectionManager = [[NSURLConnection alloc] initWithRequest:urlRequest delegate:self];
-    
-    self.downloadedMutableData = [[NSMutableData alloc]init];
+    [self testProgress:0.00];
+    HTTPClient *client = [HTTPClient sharedHTTPClient];
+    [client setDelegate:self];
+    [client serverAPICall:nil andURL:@"App-MDNSearchForOpr"];
     
 }
 
--(void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response {
-    
-    NSLog(@"%lld", response.expectedContentLength);
-    self.urlResponse = response;
-    
-}
-
--(void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data {
-    
-    [self.downloadedMutableData appendData:data];
-    self.progressView.progress = ((100.0/self.urlResponse.expectedContentLength)*self.downloadedMutableData.length)/100;
-    
-    if(self.progressView.progress == 1) {
-        self.progressView.hidden = YES;
-    } else {
-        self.progressView.hidden = NO;
-    }
-    
-    NSLog(@"%.0f%%", ((100.0/self.urlResponse.expectedContentLength)*self.downloadedMutableData.length));
+-(void) updateProgress:(NSNumber *)percent
+{
+    NSLog(@"[updateProgress] %f", [self.progressView progress]);
+    [self.progressView setProgress:percent.floatValue];
+    NSLog(@"[updateProgress] %f", [self.progressView progress]);
     
 }
 
--(void)connectionDidFinishLoading:(NSURLConnection *)connection {
-    
-    NSLog(@"finished");
-    
+
+-(void) testProgress:(float)num
+{
+    NSLog(@"[testProgress]");
+    [self performSelectorOnMainThread:@selector(updateProgress:) withObject:[NSNumber numberWithFloat:num] waitUntilDone:NO];
 }
+
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 
-
-
-
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+-(void)HTTPClient:(HTTPClient *)sharedHTTPClient didSucceedWithResponse:(id)responseObject
+{
+    [self testProgress:0.50];
+    NSMutableDictionary *dir = [NSJSONSerialization JSONObjectWithData:responseObject options:0 error:nil];
+    NSLog(@"%@", dir);
+    //todo: header값을 못불러 오겠다...
+    
+    if([[dir objectForKey:@"RESULT_CODE"] isEqualToString:@"0"])
+    {
+        //MDNSearch성공 - MDN 기준으로 MDNSearchForOpr 처리시작
+        NSLog(@"[MDNSearchForOpr 성공] MDN=%@", [dir objectForKey:@"MDN"]);
+        [self testProgress:1.00];
+        //Page 이동
+        [NSThread sleepForTimeInterval:1];
+        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+        [self presentViewController:[storyboard instantiateViewControllerWithIdentifier:@"MainTabBar"] animated:YES completion:nil];
+    } else {
+        
+        //MDNSearchForOpr 실패
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"로그인 실패"
+                                                  message:@"인가되지 않은 사용자입니다. 앱을 종료 합니다"
+                                                  delegate:self
+                                                  cancelButtonTitle:@"확인"
+                                                  otherButtonTitles:nil];
+        [alert show];
+        exit(0); //팝업 후 프로그램 종료
+    }
 }
-*/
+
+-(void)HTTPClient:(HTTPClient *)sharedHTTPClient didFailWithError:(NSError *)error
+{
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Linkkage Error"
+                                                    message:[error localizedDescription]
+                                                   delegate:self
+                                          cancelButtonTitle:@"OK"
+                                          otherButtonTitles:nil];
+    [alert show];
+}
 
 @end
