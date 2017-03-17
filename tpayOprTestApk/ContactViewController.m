@@ -9,7 +9,7 @@
 #import "ContactViewController.h"
 #import "NSData+AESCrypt.h"
 #import "NFilterCommon.h"
-#import "ContactSelect1Controller.h"
+#import "ContactSelect1View.h"
 
 @interface ContactViewController ()
 
@@ -18,6 +18,7 @@
 @implementation ContactViewController
 
 @synthesize selector, dp, container;
+@synthesize api1, api2;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -48,15 +49,37 @@
 // API 선택 변경시 event
 - (IBAction)changeAPI:(id)sender {
     NSString *str = [dp getValueAtIndex:dp.selectedIndex];
+    
+    if(str == nil){
+        return;
+    }
     NSLog(@"%@", [@"changeAPI : " stringByAppendingString:str]);
     
-    ContactSelect1Controller *select1 = [[ContactSelect1Controller alloc] init];
-    [select1 viewDidLoad];
-    UIView *api1 = [[UIView alloc] initWithFrame:self.container.frame];
-    [api1 addSubview:select1.view];
+    /*
+        선택 API에 따라 화면을 변경
+     */
+    if([str isEqualToString:@"Offsprings"] == YES){
+        [self.container addSubview:api1];
+    }else{
+        [self.container addSubview:api2];
+    }
+}
+
+// 전송 버튼 클릭 시 event
+- (IBAction)send:(id)sender{
+    NSString *str = [dp getValueAtIndex:dp.selectedIndex];
     
-    [self.container addSubview:select1.view];
+    if(str == nil){
+        return;
+    }
+    NSLog(@"%@", [@"send : " stringByAppendingString:str]);
     
+    /*
+     선택 API에 따라 화면을 변경
+     */
+    if([str isEqualToString:@"Offsprings"] == YES){
+        [ContactSelect1View send];
+    }
 }
 
 - (void)didReceiveMemoryWarning {

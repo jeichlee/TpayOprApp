@@ -6,18 +6,21 @@
 //  Copyright © 2017년 jeichlee. All rights reserved.
 //
 
-#import <ContactSelect1Controller.h>
+#import "ContactSelect1View.h"
 
 
-
-@interface ContactSelect1Controller ()
+@interface ContactSelect1View ()
 
 @end
 
-@implementation ContactSelect1Controller
+@implementation ContactSelect1View
 
--(void) viewDidLoad {
-    [super viewDidLoad];
+@synthesize label1;
+
+
++(void)send{
+//     @"Called function send";
+    
 }
 
 @end

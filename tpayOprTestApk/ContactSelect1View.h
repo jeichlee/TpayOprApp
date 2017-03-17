@@ -8,6 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ContactSelect1Controller : UIViewController
+@interface ContactSelect1View : UIView
+
+@property (strong, nonatomic) IBOutlet UILabel *label1;
+
++(void)send;
 
 @end
+
