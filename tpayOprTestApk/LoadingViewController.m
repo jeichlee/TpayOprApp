@@ -73,6 +73,7 @@
     } else {
         
         //MDNSearchForOpr 실패
+        //todo: Deprecated 현행화 해야 함
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"로그인 실패"
                                                   message:@"인가되지 않은 사용자입니다. 앱을 종료 합니다"
                                                   delegate:self

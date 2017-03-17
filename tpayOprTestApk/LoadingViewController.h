@@ -4,7 +4,7 @@
 //
 //  Created by jeichlee on 2017. 3. 7..
 //  Copyright © 2017년 jeichlee. All rights reserved.
-//
+//  앱 구동 초기 화면 View Controller
 
 #import <UIKit/UIKit.h>
 #import "HTTPClient.h"
