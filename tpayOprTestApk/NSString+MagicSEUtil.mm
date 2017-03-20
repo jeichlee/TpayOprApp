@@ -90,61 +90,61 @@ unsigned char pRootCert[] = {
     
     // 세션키를 만든다.
     nRv = MagicSE_HandShakeSessionKey( pszServerCert, &pszSessionKey, pRootCert, sizeof(pRootCert) );
-    //printf( "MagicSE_HandShakeSessionKey : %d, %s\n", nRv, pszSessionKey );
+    printf( "MagicSE_HandShakeSessionKey : %d, %s\n", nRv, pszSessionKey );
     if( nRv != MAGICSE_OK )	goto	Finally;
     nRv = MagicSE_GetEncSessionKey( pszSessionKey, &pszEncSessionKey );
     
-    //printf( "MagicSE_GetEncSessionKey : %d, %s\n", nRv, pszEncSessionKey );
+    printf( "MagicSE_GetEncSessionKey : %d, %s\n", nRv, pszEncSessionKey );
     if( nRv != MAGICSE_OK )	goto	Finally;
     
-    //str = [NSString stringWithUTF8String: pszEncSessionKey];
+    str = [NSString stringWithUTF8String: pszEncSessionKey];
     
     // 서버 인증서로 암호화된 세션키를 서버로 전송한다.
-    // send : pszEncSessionKey
+    send : pszEncSessionKey;
     
     
     // 세션키로 데이터를 암호화 한다.
-//    nRv = MagicSE_MakeSessionKey( pszServerCert, &pszSessionKey );
-//    printf( "MagicSE_MakeSessionKey : %d, %s\n", nRv, pszSessionKey );
-//    if( nRv != MAGICSE_OK )	goto	Finally;
-//    nRv = MagicSE_EncData( pszSessionKey, (unsigned char*)szPlainData1, strlen(szPlainData1), &pszEncData1 );
-//    printf( "MagicSE_EncData1 : %d, %s\n", nRv, pszEncData1 );
-//    if( nRv != MAGICSE_OK )	goto	Finally;
-//    
-//    
-//    
-//    // 세션키로 암호화된 데이터를 서버로 전송한다.
-//    // send : pszEncData1
-//    
-//    // 서버로부터 암호화 데이터를 수신한다.
-//    // recv : pszEncData1
-//    
-//    
-//    // 세션키로 암호화 데이터를 복호화 한다.
-//    nRv = MagicSE_DecData( pszSessionKey, pszEncData1, &pPlainText1, &nPlainTextLen1 );
-//    printf( "MagicSE_DecData1 : %d, %s\n", nRv, (char*)pPlainText1 );
-//    if( nRv != MAGICSE_OK )	goto	Finally;
-//    
-//    // 세션키로 데이터를 암호화 한다.
-//    nRv = MagicSE_MakeSessionKey( pszServerCert, &pszSessionKey );
-//    printf( "MagicSE_MakeSessionKey : %d, %s\n", nRv, pszSessionKey );
-//    if( nRv != MAGICSE_OK )	goto	Finally;
-//    nRv = MagicSE_EncData( pszSessionKey, (unsigned char*)szPlainData2, strlen(szPlainData2), &pszEncData2 );
-//    printf( "MagicSE_EncData2 : %d, %s\n", nRv, pszEncData2 );
-//    if( nRv != MAGICSE_OK )	goto	Finally;
-//    
-//    
-//    // 세션키로 암호화된 데이터를 서버로 전송한다.
-//    // send : pszEncData2
-//    
-//    // 서버로부터 암호화 데이터를 수신한다.
-//    // recv : pszEncData2
-//    
-//    
-//    // 세션키로 암호화 데이터를 복호화 한다.
-//    nRv = MagicSE_DecData( pszSessionKey, pszEncData2, &pPlainText2, &nPlainTextLen2 );
-//    printf( "MagicSE_DecData2 : %d, %s\n", nRv, (char*)pPlainText2 );
-//    if( nRv != MAGICSE_OK )	goto	Finally;
+    nRv = MagicSE_MakeSessionKey( pszServerCert, &pszSessionKey );
+    printf( "MagicSE_MakeSessionKey : %d, %s\n", nRv, pszSessionKey );
+    if( nRv != MAGICSE_OK )	goto	Finally;
+    nRv = MagicSE_EncData( pszSessionKey, (unsigned char*)szPlainData1, strlen(szPlainData1), &pszEncData1 );
+    printf( "MagicSE_EncData1 : %d, %s\n", nRv, pszEncData1 );
+    if( nRv != MAGICSE_OK )	goto	Finally;
+    
+    
+    
+    // 세션키로 암호화된 데이터를 서버로 전송한다.
+    // send : pszEncData1
+    
+    // 서버로부터 암호화 데이터를 수신한다.
+    // recv : pszEncData1
+    
+    
+    // 세션키로 암호화 데이터를 복호화 한다.
+    nRv = MagicSE_DecData( pszSessionKey, pszEncData1, &pPlainText1, &nPlainTextLen1 );
+    printf( "MagicSE_DecData1 : %d, %s\n", nRv, (char*)pPlainText1 );
+    if( nRv != MAGICSE_OK )	goto	Finally;
+    
+    // 세션키로 데이터를 암호화 한다.
+    nRv = MagicSE_MakeSessionKey( pszServerCert, &pszSessionKey );
+    printf( "MagicSE_MakeSessionKey : %d, %s\n", nRv, pszSessionKey );
+    if( nRv != MAGICSE_OK )	goto	Finally;
+    nRv = MagicSE_EncData( pszSessionKey, (unsigned char*)szPlainData2, strlen(szPlainData2), &pszEncData2 );
+    printf( "MagicSE_EncData2 : %d, %s\n", nRv, pszEncData2 );
+    if( nRv != MAGICSE_OK )	goto	Finally;
+    
+    
+    // 세션키로 암호화된 데이터를 서버로 전송한다.
+//    send : pszEncData2;
+    
+    // 서버로부터 암호화 데이터를 수신한다.
+//    recv : pszEncData2;
+    
+    
+    // 세션키로 암호화 데이터를 복호화 한다.
+    nRv = MagicSE_DecData( pszSessionKey, pszEncData2, &pPlainText2, &nPlainTextLen2 );
+    printf( "MagicSE_DecData2 : %d, %s\n", nRv, (char*)pPlainText2 );
+    if( nRv != MAGICSE_OK )	goto	Finally;
     
 Finally:
     MagicSE_FreeData( (void**)&pPlainText1 );

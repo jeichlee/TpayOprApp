@@ -10,7 +10,7 @@
 
 @interface NSString (MagicSEUtil)
 
--(NSString *) MagicSE_Enc:(NSString *)str;
+-(NSString *) MAGIC_ENC:(NSString *)str;
 
 void CASE_1( );
 

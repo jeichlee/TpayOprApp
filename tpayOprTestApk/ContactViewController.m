@@ -55,7 +55,7 @@
     // MagicSE 암호화
     NSString *magicStr = @"";
     
-    magicStr = [NSString stringWithFormat:@"%@", [magicStr MagicSE_Enc:@"ABC"]] ;
+    magicStr = [magicStr MAGIC_ENC:@"ABC"] ;
     
     NSLog(@"%@", magicStr);
 }
