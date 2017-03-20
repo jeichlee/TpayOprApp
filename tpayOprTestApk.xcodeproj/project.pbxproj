@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		62F5A45D1E7A782C00F06F5D /* CommonHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 62F5A45C1E7A782C00F06F5D /* CommonHeader.m */; };
+		62F5A45F1E7A812100F06F5D /* common.plist in Resources */ = {isa = PBXBuildFile; fileRef = 62F5A45E1E7A812100F06F5D /* common.plist */; };
+		62F5A4631E7A872500F06F5D /* NSString+Common.m in Sources */ = {isa = PBXBuildFile; fileRef = 62F5A4621E7A872500F06F5D /* NSString+Common.m */; };
 		62F8B7711E6FDC2100EA70F3 /* libnFilter.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 62F8B7051E6FDC2100EA70F3 /* libnFilter.a */; };
 		62F8B7721E6FDC2100EA70F3 /* libNSafer.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 62F8B7061E6FDC2100EA70F3 /* libNSafer.a */; };
 		62F8B7731E6FDC2100EA70F3 /* emptynum1_NSHC.png in Resources */ = {isa = PBXBuildFile; fileRef = 62F8B71A1E6FDC2100EA70F3 /* emptynum1_NSHC.png */; };
@@ -110,6 +113,11 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		62F5A45B1E7A782000F06F5D /* CommonHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommonHeader.h; sourceTree = "<group>"; };
+		62F5A45C1E7A782C00F06F5D /* CommonHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommonHeader.m; sourceTree = "<group>"; };
+		62F5A45E1E7A812100F06F5D /* common.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = common.plist; sourceTree = "<group>"; };
+		62F5A4611E7A86E200F06F5D /* NSString+Common.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSString+Common.h"; sourceTree = "<group>"; };
+		62F5A4621E7A872500F06F5D /* NSString+Common.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Common.m"; sourceTree = "<group>"; };
 		62F8B7041E6FDC2100EA70F3 /* EccEncryptor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EccEncryptor.h; sourceTree = "<group>"; };
 		62F8B7051E6FDC2100EA70F3 /* libnFilter.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libnFilter.a; sourceTree = "<group>"; };
 		62F8B7061E6FDC2100EA70F3 /* libNSafer.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libNSafer.a; sourceTree = "<group>"; };
@@ -257,6 +265,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		62F5A45A1E7A780100F06F5D /* common */ = {
+			isa = PBXGroup;
+			children = (
+				62F5A45B1E7A782000F06F5D /* CommonHeader.h */,
+				62F5A45C1E7A782C00F06F5D /* CommonHeader.m */,
+			);
+			name = common;
+			sourceTree = "<group>";
+		};
+		62F5A4601E7A86A200F06F5D /* CommonUtil */ = {
+			isa = PBXGroup;
+			children = (
+				62F5A4611E7A86E200F06F5D /* NSString+Common.h */,
+				62F5A4621E7A872500F06F5D /* NSString+Common.m */,
+			);
+			name = CommonUtil;
+			sourceTree = "<group>";
+		};
 		62F8B55C1E6FC67300EA70F3 /* NFilterUtil */ = {
 			isa = PBXGroup;
 			children = (
@@ -499,6 +525,7 @@
 		EFC9C4161E6ED997006378CD /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				62F5A45E1E7A812100F06F5D /* common.plist */,
 				EFC9C4481E6F0B92006378CD /* resource */,
 				EFC9C4271E6ED997006378CD /* LaunchScreen.storyboard */,
 				EFC9C4411E6EEA66006378CD /* Main.storyboard */,
@@ -509,6 +536,7 @@
 		EFC9C4301E6EDF1B006378CD /* CommonCategory */ = {
 			isa = PBXGroup;
 			children = (
+				62F5A4601E7A86A200F06F5D /* CommonUtil */,
 				62F8B7C41E6FE59000EA70F3 /* UIUtil */,
 				62F8B55C1E6FC67300EA70F3 /* NFilterUtil */,
 				EFC9C4381E6EE10A006378CD /* ConnUtil */,
@@ -545,6 +573,7 @@
 		EFC9C43A1E6EE18C006378CD /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
+				62F5A45A1E7A780100F06F5D /* common */,
 				62F8B7D01E71157E00EA70F3 /* contact */,
 				EFC9C41C1E6ED997006378CD /* AppTestViewController.h */,
 				EFC9C41D1E6ED997006378CD /* AppTestViewController.m */,
@@ -712,6 +741,7 @@
 				62F8B7B61E6FDC2100EA70F3 /* nf_ios_num_num@3x.png in Resources */,
 				62F8B7AD1E6FDC2100EA70F3 /* nf_ios_bubble@3x.png in Resources */,
 				62F8B7861E6FDC2100EA70F3 /* nf_ios_spacebar.png in Resources */,
+				62F5A45F1E7A812100F06F5D /* common.plist in Resources */,
 				62F8B77F1E6FDC2100EA70F3 /* nf_ios_icon_shift.png in Resources */,
 				62F8B7C31E6FDC2100EA70F3 /* tock.caf in Resources */,
 				62F8B7801E6FDC2100EA70F3 /* nf_ios_icon_shift_pressed.png in Resources */,
@@ -728,11 +758,13 @@
 			files = (
 				EFC9C4401E6EE95A006378CD /* ContactViewController.m in Sources */,
 				62F8B7CD1E70024F00EA70F3 /* NSData+AESCrypt.m in Sources */,
+				62F5A4631E7A872500F06F5D /* NSString+Common.m in Sources */,
 				EFC9C4361E6EDF8A006378CD /* NSString+Utilities.m in Sources */,
 				EFC9C43D1E6EE935006378CD /* OprCheckViewController.m in Sources */,
 				EFC9C4211E6ED997006378CD /* PayTestViewController.m in Sources */,
 				EFC9C41B1E6ED997006378CD /* AppDelegate.m in Sources */,
 				EFC9C41E1E6ED997006378CD /* AppTestViewController.m in Sources */,
+				62F5A45D1E7A782C00F06F5D /* CommonHeader.m in Sources */,
 				62F8B7CA1E6FE61E00EA70F3 /* UIDownPicker.m in Sources */,
 				EFC9C4181E6ED997006378CD /* main.m in Sources */,
 				EFC9C4471E6EEE33006378CD /* LoadingViewController.m in Sources */,

@@ -17,10 +17,8 @@
 
 @synthesize label1;
 
-
-+(void)send{
-//     @"Called function send";
-    
+-(void)send{
+    label1.text = @"Called function send";
 }
 
 @end

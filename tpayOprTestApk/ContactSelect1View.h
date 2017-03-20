@@ -12,7 +12,10 @@
 
 @property (strong, nonatomic) IBOutlet UILabel *label1;
 
-+(void)send;
+// Controller에서 호출하는 메서드 반드시 구현
+-(void)send;
 
 @end
+
+
 

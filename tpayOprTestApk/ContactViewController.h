@@ -15,6 +15,7 @@
 @property(strong, nonatomic) DownPicker *dp;
 
 @property (strong, nonatomic) IBOutlet UIView *container;
+@property (strong, nonatomic) IBOutlet UIView *header;
 
 @property (nonatomic, retain) IBOutlet UIView *api1;
 @property (nonatomic, retain) IBOutlet UIView *api2;

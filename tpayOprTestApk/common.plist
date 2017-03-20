@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>상용</key>
+	<string>http://tpay.sktelecom.com:8001/web/handler</string>
+	<key>상용-고도화</key>
+	<string>http://tpay.sktelecom.com:8002/app/handler</string>
+	<key>개발</key>
+	<string>1</string>
+	<key>개발-고도화</key>
+	<string>2</string>
+	<key>스테이징</key>
+	<string>3</string>
+	<key>스테이징-고도화</key>
+	<string>4</string>
+</dict>
+</plist>

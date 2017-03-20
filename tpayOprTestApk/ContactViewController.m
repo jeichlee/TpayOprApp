@@ -9,6 +9,9 @@
 #import "ContactViewController.h"
 #import "NSData+AESCrypt.h"
 #import "NFilterCommon.h"
+#import "CommonHeader.h"
+
+// API 헤더 import
 #import "ContactSelect1View.h"
 
 @interface ContactViewController ()
@@ -17,7 +20,7 @@
 
 @implementation ContactViewController
 
-@synthesize selector, dp, container;
+@synthesize selector, dp, container, header;
 @synthesize api1, api2;
 
 - (void)viewDidLoad {
@@ -27,7 +30,7 @@
     
     NSMutableArray* bandArray = [[NSMutableArray alloc] init];
     
-    // add some sample data
+    // API 목록 관리
     [bandArray addObject:@"Offsprings"];
     [bandArray addObject:@"Radiohead"];
     [bandArray addObject:@"Muse"];
@@ -36,6 +39,9 @@
     [bandArray addObject:@"Social Distortion"];
     
     dp = [[DownPicker alloc] initWithTextField:selector withData:bandArray];
+    
+    // Header 초기화
+    header = [header init];
     
     // NFilter 암호화
     NSData *aesData = [[NSData alloc] init];
@@ -57,7 +63,9 @@
     
     /*
         선택 API에 따라 화면을 변경
+        - API 추가시 아래 if 구문에 해당 API View로 전환되도록 내용 추가
      */
+    [[[self.container subviews] lastObject] removeFromSuperview];
     if([str isEqualToString:@"Offsprings"] == YES){
         [self.container addSubview:api1];
     }else{
@@ -66,20 +74,11 @@
 }
 
 // 전송 버튼 클릭 시 event
+/*
+ API View에 해당하는 View Class로 send 이벤트 발생시키는 메서드로 API 추가시에 수정 할 필요없음.
+ */
 - (IBAction)send:(id)sender{
-    NSString *str = [dp getValueAtIndex:dp.selectedIndex];
-    
-    if(str == nil){
-        return;
-    }
-    NSLog(@"%@", [@"send : " stringByAppendingString:str]);
-    
-    /*
-     선택 API에 따라 화면을 변경
-     */
-    if([str isEqualToString:@"Offsprings"] == YES){
-        [ContactSelect1View send];
-    }
+    [[[self.container subviews] lastObject] send];
 }
 
 - (void)didReceiveMemoryWarning {
