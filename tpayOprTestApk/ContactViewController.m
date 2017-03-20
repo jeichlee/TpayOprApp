@@ -10,6 +10,7 @@
 #import "NSData+AESCrypt.h"
 #import "NFilterCommon.h"
 #import "CommonHeader.h"
+#import "NSString+MagicSEUtil.h"
 
 // API 헤더 import
 #import "ContactSelectView.h"
@@ -49,6 +50,14 @@
     NSData *encData = [aesData NF_AES256EncryptWithKey:@"0123456789012345678901" iv:password AESMode:NFilterAESModeCBC];
     
     NSLog(@"%@", encData);
+    
+    
+    // MagicSE 암호화
+    NSString *magicStr = @"";
+    
+    magicStr = [NSString stringWithFormat:@"%@", [magicStr MagicSE_Enc:@"ABC"]] ;
+    
+    NSLog(@"%@", magicStr);
 }
 
 // API 선택 변경시 event
