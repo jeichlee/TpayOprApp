@@ -8,9 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ContactSelect1View : UIView
+@interface ContactSelectView : UIView
 
-@property (strong, nonatomic) IBOutlet UILabel *label1;
+@property (strong, nonatomic) IBOutlet UITableView *tView;
 
 // Controller에서 호출하는 메서드 반드시 구현
 -(void)send;

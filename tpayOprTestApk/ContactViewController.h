@@ -17,8 +17,7 @@
 @property (strong, nonatomic) IBOutlet UIView *container;
 @property (strong, nonatomic) IBOutlet UIView *header;
 
-@property (nonatomic, retain) IBOutlet UIView *api1;
-@property (nonatomic, retain) IBOutlet UIView *api2;
+@property (nonatomic, retain) IBOutlet UIView *contactView;
 
 - (IBAction)changeAPI:(id)sender;
 - (IBAction)send:(id)sender;

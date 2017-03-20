@@ -6,19 +6,20 @@
 //  Copyright © 2017년 jeichlee. All rights reserved.
 //
 
-#import "ContactSelect1View.h"
+#import "ContactSelectView.h"
 
 
-@interface ContactSelect1View ()
+@interface ContactSelectView ()
 
 @end
 
-@implementation ContactSelect1View
+@implementation ContactSelectView
 
-@synthesize label1;
+@synthesize tView;
 
 -(void)send{
-    label1.text = @"Called function send";
+    tView = [[UITableView alloc] init];
+    
 }
 
 @end
