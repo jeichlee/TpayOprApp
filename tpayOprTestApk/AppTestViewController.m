@@ -17,6 +17,8 @@
 
 @synthesize dp, selector, header, container;
 
+@synthesize lisenceSearch;
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -26,11 +28,7 @@
     NSMutableArray* bandArray = [[NSMutableArray alloc] init];
     
     // API 목록 관리
-    [bandArray addObject:@"전체"];
-    [bandArray addObject:@"T Pay 개발팀"];
-    [bandArray addObject:@"CSP"];
-    [bandArray addObject:@"TRBS"];
-    [bandArray addObject:@"Infra"];
+    [bandArray addObject:@"LisenceSearch"];
     
     dp = [[DownPicker alloc] initWithTextField:selector withData:bandArray];
     
@@ -51,12 +49,14 @@
      선택 API에 따라 화면을 변경
      - API 추가시 아래 if 구문에 해당 API View로 전환되도록 내용 추가
      */
-    //    [[[self.container subviews] lastObject] removeFromSuperview];
-    //    if([str isEqualToString:@"Offsprings"] == YES){
-    //        [self.container addSubview:api1];
-    //    }else{
-    //        [self.container addSubview:api2];
-    //    }
+    [[[self.container subviews] lastObject] removeFromSuperview];
+    CGRect containerSize = CGRectMake(0.0f, 0.0f, self.container.frame.size.width, self.container.frame.size.height);
+    if([str isEqualToString:@"LisenceSearch"] == YES){
+        [lisenceSearch setFrame: containerSize];
+        [self.container addSubview:lisenceSearch];
+    }else{
+        
+    }
 }
 
 // 전송 버튼 클릭 시 event
@@ -64,7 +64,7 @@
  API View에 해당하는 View Class로 send 이벤트 발생시키는 메서드
  */
 - (IBAction)send:(id)sender{
-    //    [[[self.container subviews] lastObject] send : header];
+    [[[self.container subviews] lastObject] send : header];
 }
 
 - (void)didReceiveMemoryWarning {

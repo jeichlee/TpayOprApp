@@ -74,6 +74,8 @@
         선택 API에 따라 화면을 변경
      */
     [[[self.container subviews] lastObject] removeFromSuperview];
+    CGRect containerSize = CGRectMake(0.0f, 0.0f, self.container.frame.size.width, self.container.frame.size.height);
+    [contactView setFrame: containerSize];
     [self.container addSubview:contactView];
 }
 

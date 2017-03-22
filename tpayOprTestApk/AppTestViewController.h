@@ -9,6 +9,8 @@
 #import <UIKit/UIKit.h>
 #import "DownPicker.h"
 
+#import "LisenceSearchView.h"
+
 @interface AppTestViewController : UIViewController
 
 @property (strong, nonatomic) IBOutlet UITextField *selector;
@@ -16,6 +18,7 @@
 @property (strong, nonatomic) IBOutlet UIView *container;
 @property (strong, nonatomic) IBOutlet UIView *header;
 
+@property (strong, nonatomic) IBOutlet UIView *lisenceSearch;
 
 -(IBAction) send:(id)sender;
 -(IBAction) changeAPI:(id)sender;
