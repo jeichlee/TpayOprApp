@@ -10,8 +10,10 @@
 
 @implementation NSString (Common)
 
--(NSString *) getProperty:(NSString *)pName{
-    if(pName == nil || [pName isEqualToString:@""]){
+-(NSString *) getProperty{
+//    NSLog(@"pName : %@", self);
+    
+    if(self == nil || [self isEqualToString:@""]){
         return @"";
     }
     
@@ -20,9 +22,27 @@
     NSString *path = [[NSBundle mainBundle] bundlePath];
     NSString *finalPath = [path stringByAppendingPathComponent:@"common.plist"];
 
+//    NSLog(@"finalPath : %@", finalPath);
+    
     NSMutableDictionary *namesPlist = [[NSMutableDictionary alloc] initWithContentsOfFile:finalPath];
     
-    pVal = [namesPlist objectForKey:pName];
+    pVal = [namesPlist objectForKey:self];
+    
+//    NSLog(@"pVal : %@", pVal);
+    
+    
+    return pVal;
+}
+
+-(NSArray *) getKeys{
+    NSArray *pVal = [[NSArray alloc] init];
+    
+    NSString *path = [[NSBundle mainBundle] bundlePath];
+    NSString *finalPath = [path stringByAppendingPathComponent:@"common.plist"];
+    
+    NSMutableDictionary *namesPlist = [[NSMutableDictionary alloc] initWithContentsOfFile:finalPath];
+    
+    pVal = [namesPlist allKeys];
     
     return pVal;
 }

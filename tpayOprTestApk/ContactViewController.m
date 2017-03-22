@@ -14,6 +14,7 @@
 
 // API 헤더 import
 #import "ContactSelectView.h"
+#import "CommonHeader.h"
 
 @interface ContactViewController ()
 
@@ -78,10 +79,10 @@
 
 // 전송 버튼 클릭 시 event
 /*
- API View에 해당하는 View Class로 send 이벤트 발생시키는 메서드로 API 추가시에 수정 할 필요없음.
+ API View에 해당하는 View Class로 send 이벤트 발생시키는 메서드
  */
 - (IBAction)send:(id)sender{
-    [[[self.container subviews] lastObject] send];
+    [[[self.container subviews] lastObject] send : header];
 }
 
 - (void)didReceiveMemoryWarning {

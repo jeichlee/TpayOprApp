@@ -7,13 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CommonHeader.h"
+#import "ContactTableView.h"
 
 @interface ContactSelectView : UIView
 
-@property (strong, nonatomic) IBOutlet UITableView *tView;
+@property (strong, nonatomic) IBOutlet ContactTableView *tView;
 
 // Controller에서 호출하는 메서드 반드시 구현
--(void)send;
+-(void)send:(UIView *) header;
 
 @end
 

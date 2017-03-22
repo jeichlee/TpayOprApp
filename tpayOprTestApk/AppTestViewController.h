@@ -7,9 +7,18 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "DownPicker.h"
 
 @interface AppTestViewController : UIViewController
 
+@property (strong, nonatomic) IBOutlet UITextField *selector;
+@property (strong, nonatomic) DownPicker *dp;
+@property (strong, nonatomic) IBOutlet UIView *container;
+@property (strong, nonatomic) IBOutlet UIView *header;
+
+
+-(IBAction) send:(id)sender;
+-(IBAction) changeAPI:(id)sender;
 
 @end
 

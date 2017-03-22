@@ -38,6 +38,8 @@
 		62F5A4A11E800E4700F06F5D /* NSString+MagicSEUtil.mm in Sources */ = {isa = PBXBuildFile; fileRef = 62F5A4A01E800E4700F06F5D /* NSString+MagicSEUtil.mm */; };
 		62F5A4A61E800E5800F06F5D /* libMagicSEV2.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 62F5A4A21E800E5800F06F5D /* libMagicSEV2.0.a */; };
 		62F5A4A71E800E5800F06F5D /* libWDSTKI30_LIB.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 62F5A4A31E800E5800F06F5D /* libWDSTKI30_LIB.a */; };
+		62F5A4AA1E80ED9D00F06F5D /* UserInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 62F5A4A91E80ED9D00F06F5D /* UserInfo.m */; };
+		62F5A4AD1E81144600F06F5D /* ContactTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 62F5A4AC1E81144600F06F5D /* ContactTableView.m */; };
 		62F8B7711E6FDC2100EA70F3 /* libnFilter.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 62F8B7051E6FDC2100EA70F3 /* libnFilter.a */; };
 		62F8B7721E6FDC2100EA70F3 /* libNSafer.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 62F8B7061E6FDC2100EA70F3 /* libNSafer.a */; };
 		62F8B7731E6FDC2100EA70F3 /* emptynum1_NSHC.png in Resources */ = {isa = PBXBuildFile; fileRef = 62F8B71A1E6FDC2100EA70F3 /* emptynum1_NSHC.png */; };
@@ -162,6 +164,10 @@
 		62F5A4A31E800E5800F06F5D /* libWDSTKI30_LIB.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libWDSTKI30_LIB.a; sourceTree = "<group>"; };
 		62F5A4A41E800E5800F06F5D /* MagicSE2_Error.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MagicSE2_Error.h; sourceTree = "<group>"; };
 		62F5A4A51E800E5800F06F5D /* MagicSE2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MagicSE2.h; sourceTree = "<group>"; };
+		62F5A4A81E80ED4000F06F5D /* UserInfo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UserInfo.h; sourceTree = "<group>"; };
+		62F5A4A91E80ED9D00F06F5D /* UserInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserInfo.m; sourceTree = "<group>"; };
+		62F5A4AB1E8113C700F06F5D /* ContactTableView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ContactTableView.h; sourceTree = "<group>"; };
+		62F5A4AC1E81144600F06F5D /* ContactTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactTableView.m; sourceTree = "<group>"; };
 		62F8B7041E6FDC2100EA70F3 /* EccEncryptor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EccEncryptor.h; sourceTree = "<group>"; };
 		62F8B7051E6FDC2100EA70F3 /* libnFilter.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libnFilter.a; sourceTree = "<group>"; };
 		62F8B7061E6FDC2100EA70F3 /* libNSafer.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libNSafer.a; sourceTree = "<group>"; };
@@ -353,6 +359,8 @@
 			children = (
 				62F5A45B1E7A782000F06F5D /* CommonHeader.h */,
 				62F5A45C1E7A782C00F06F5D /* CommonHeader.m */,
+				62F5A4A81E80ED4000F06F5D /* UserInfo.h */,
+				62F5A4A91E80ED9D00F06F5D /* UserInfo.m */,
 			);
 			name = common;
 			sourceTree = "<group>";
@@ -585,6 +593,8 @@
 			children = (
 				62F8B7D11E7115D500EA70F3 /* ContactSelectView.h */,
 				62F8B7D21E7115F200EA70F3 /* ContactSelectView.m */,
+				62F5A4AB1E8113C700F06F5D /* ContactTableView.h */,
+				62F5A4AC1E81144600F06F5D /* ContactTableView.m */,
 			);
 			name = contact;
 			sourceTree = "<group>";
@@ -907,8 +917,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				62F5A4681E7FFD7B00F06F5D /* AFHTTPSessionManager.h in Sources */,
+				62F5A4AA1E80ED9D00F06F5D /* UserInfo.m in Sources */,
 				62F5A4691E7FFD7B00F06F5D /* AFNetworkReachabilityManager.h in Sources */,
 				62F5A46A1E7FFD7B00F06F5D /* AFSecurityPolicy.h in Sources */,
+				62F5A4AD1E81144600F06F5D /* ContactTableView.m in Sources */,
 				62F5A46B1E7FFD7B00F06F5D /* AFURLRequestSerialization.h in Sources */,
 				62F5A46C1E7FFD7B00F06F5D /* AFURLResponseSerialization.h in Sources */,
 				62F5A46D1E7FFD7B00F06F5D /* AFURLResponseSerialization.m in Sources */,

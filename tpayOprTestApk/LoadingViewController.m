@@ -10,6 +10,7 @@
 #import "AppTestViewController.h"
 #import "AFNetworking.h"
 #import "HTTPClient.h"
+#import "UserInfo.h"
 
 @interface LoadingViewController ()
 
@@ -65,6 +66,9 @@
     {
         //MDNSearch성공 - MDN 기준으로 MDNSearchForOpr 처리시작
         NSLog(@"[MDNSearchForOpr 성공] MDN=%@", [dir objectForKey:@"MDN"]);
+        UserInfo *user = [[UserInfo alloc] init];
+        [UserInfo setUserMdn:[dir objectForKey:@"MDN"]];
+        
         [self testProgress:1.00];
         //Page 이동
         [NSThread sleepForTimeInterval:1];
