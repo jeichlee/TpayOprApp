@@ -11,8 +11,6 @@
 @interface NSString (MagicSEUtil)
 
 -(NSString *) MAGIC_ENC:(NSString *)str;
-
-void CASE_1( );
-
+-(NSString *) MAGIC_DEC:(NSString *)str;
 
 @end
