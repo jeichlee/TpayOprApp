@@ -7,19 +7,24 @@
 //
 
 #import "ContactSelectView.h"
-
-
 @interface ContactSelectView ()
-
+{
+    @private
+    CommonHeader *cHeader;
+}
 @end
 
 @implementation ContactSelectView
 
 @synthesize tView;
 
--(void)send{
-    tView = [[UITableView alloc] init];
+-(void)send:(UIView *) header{
+    tView = [[ContactTableView alloc] init];
+    cHeader = (CommonHeader *)header;
     
+    
+    NSLog(@"header serverHost : %@", cHeader.serverHost);
 }
+
 
 @end

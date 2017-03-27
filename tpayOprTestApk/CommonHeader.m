@@ -7,6 +7,7 @@
 //
 
 #import <CommonHeader.h>
+#import "UserInfo.h"
 
 @interface CommonHeader ()
 
@@ -22,25 +23,21 @@
     
     self = [super init];
     
-    NSMutableArray* serverTypeArray = [[NSMutableArray alloc] init];
+    NSMutableArray* serverTypeArray = [[NSMutableArray alloc] initWithArray:[[[NSString alloc] init] getKeys]];
     NSMutableArray* mdnArray = [[NSMutableArray alloc] init];
     
     // serverType 설정
-    [serverTypeArray addObject:@"상용"];
-    [serverTypeArray addObject:@"상용-고도화"];
-    [serverTypeArray addObject:@"개발"];
-    [serverTypeArray addObject:@"개발-고도화"];
-    [serverTypeArray addObject:@"스테이징"];
-    [serverTypeArray addObject:@"스테이징-고도화"];
     
     dpServerType = [[DownPicker alloc] initWithTextField:serverType withData:serverTypeArray];
-//    dpServerType.selectedIndex = 0;
+    [dpServerType setSelectedIndex:0];
+    [self changeServerType:nil];
     
     // MDN 설정 - 임시
-    [mdnArray addObject:@"010-3832-4035"];
+    [mdnArray addObject:[UserInfo getUserMdn]];
     
     dpMDN = [[DownPicker alloc] initWithTextField:mdnSelector withData:mdnArray];
-//    dpMDN.selectedIndex = 0;
+    [dpMDN setSelectedIndex:0];
+    [self changeMDN:nil];
     
     return self;
 }
@@ -48,7 +45,8 @@
 -(IBAction) changeServerType:(id)sender{
     NSString *serverTypeStr = [dpServerType getValueAtIndex:dpServerType.selectedIndex];
     
-    serverHost = [serverHost getProperty:serverTypeStr];
+    NSLog(@"%@", serverTypeStr);
+    serverHost = [serverTypeStr getProperty];
 }
 
 -(IBAction)changeMDN:(id)sender{
