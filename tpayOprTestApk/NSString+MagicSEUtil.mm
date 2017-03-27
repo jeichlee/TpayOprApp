@@ -70,169 +70,51 @@ unsigned char pRootCert[] = {
     0x6C,0x10,0xD6,0xEA,0x92,0x36,0xCC,0xD6,0xE2,0x24,0xC7,0x04,0x6A,0xC5,0x59
 };
 
-
-
+unsigned char	*pPlainText1 = 0x00, *pPlainText2 = 0x00;
+char			szVersion[12] = {0, }, *pszServerCert = 0x00, *pszSessionKey = 0x00, *pszEncSessionKey = 0x00,
+*pszEncData1 = 0x00, *pszEncData2 = 0x00;
+int				nRv = 0, nPlainTextLen1 = 0, nPlainTextLen2 = 0;
 
 -(NSString *) MAGIC_ENC:(NSString *)str
 {
-    //    *pPlainText1 = *(unsigned char *) [str cStringUsingEncoding:NSASCIIStringEncoding];
-    
-    char 			szPlainData1[] = "This is test1", szPlainData2[] = "This is test2";
-    unsigned char	*pPlainText1 = 0x00, *pPlainText2 = 0x00;
-    char			szVersion[12] = {0, }, *pszServerCert = 0x00, *pszSessionKey = 0x00, *pszEncSessionKey = 0x00,
-    *pszEncData1 = 0x00, *pszEncData2 = 0x00;
-    int				nRv = 0, nPlainTextLen1 = 0, nPlainTextLen2 = 0;
+    const char *cfilename = (char *)[str UTF8String];
     
     // 서버로부터 서버 인증서를 수신한다.
     // recv : pszServerCert
     pszServerCert = (char*)"000001288ZEACAQADAAAAAQAAMDAwMDAwODcxMIIDYzCCAkugAwIBAgIBAjANBgkqhkiG9w0BAQsFADBdMQswCQYDVQQGEwJLUjEWMBQGA1UECgwNRHJlYW1TZWN1cml0eTESMBAGA1UECwwJTWFnaWNTRXYyMSIwIAYDVQQDDBlEcmVhbVNlY3VyaXR5IHJvb3RDQSAyMDQ4MB4XDTEyMDMyMDA3MTAyM1oXDTIyMDMyMDA3MTAyM1oweTELMAkGA1UEBhMCa3IxFjAUBgNVBAoMDWRyZWFtc2VjdXJpdHkxGzAZBgNVBAsMEm1vYmlsZV9tYWdpY3NldjIuMDE1MDMGA1UEAwws6rWQ6rO867aA66qo67CU7J287Jik7ZS87Iqk6riw67CY6rWs7LaVXzIwNDgwggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQCyTsbYLTeLA/Gko6sTgxLjlfPr9YdeZTD5twNAqBQ40DVtsX1rG+uPHcILN9SmwM6dbLLvimeZvKTNH5z3SXOiFCM+bTm0WvaWpbaQozLPU4xlalhKisE61AL70AR5wtaZtVaBWj1s+/cYE0Z7LjSlhoBvkFowfov/BhhPJTEpc/qnRt2Wrb+4BrfDJayPRZQUJbJlUpPX3+ASHV7o0r3kfY9Dh2wPwyHP7x66EGWElt/sZdt38AGh1zh7bG9LG7ZmvIz9LDjhSoEtSFu9AncKwSRxNC+y9qal99ILcupUQW3KnS9CejI3B5TMzGtGON1L+O+v8+WefJV+l+ezApNhAgMBAAGjEjAQMA4GA1UdDwEB/wQEAwIFIDANBgkqhkiG9w0BAQsFAAOCAQEAvSsXwrJyZWwxBRXsZxGtTcG1xv2iwdmDQ0QHcSJEPNS2l/taykHEYkz7eyOeuT7YO4n/8Bovm11kUirSxS0PnTtU7KSTX7B9ik6of0BO8A0HiYWaUhLspnstp/qYTZ18NZ6lZFVzBs0s/lMLKZ+Nc6nEbjj+p/MMRmVXdt583/KiLjFspFX3M9W22vm7OaKXoRzjPXE7SHidR04fNo6wK9wwwcRZ4HALDCUZOSFBDsudvoDgDZOOFeO4XsP9WXIcArl2KBg8kFnbEIbHCkulKxL2ZMk1tJl3T9RiRZ+0e8qoasLostDrlG/s0ME+5gtcExfwafQgEqf7bYD5r9rwcAACAAAwMDAwMDAwNDABAAAAAAAAAAAAAAAAAAAAAAAAAPzfKXiFXFuO+teWsAEJ/rY+THfTgLdfOW0KgkiG2ood0XCadT4wTFk=";
     
-    
     // 세션키를 만든다.
     nRv = MagicSE_HandShakeSessionKey( pszServerCert, &pszSessionKey, pRootCert, sizeof(pRootCert) );
-    printf( "MagicSE_HandShakeSessionKey : %d, %s\n", nRv, pszSessionKey );
-    if( nRv != MAGICSE_OK )	goto	Finally;
+    
     nRv = MagicSE_GetEncSessionKey( pszSessionKey, &pszEncSessionKey );
     
-    printf( "MagicSE_GetEncSessionKey : %d, %s\n", nRv, pszEncSessionKey );
-    if( nRv != MAGICSE_OK )	goto	Finally;
-    
-    str = [NSString stringWithUTF8String: pszEncSessionKey];
-    
-    // 서버 인증서로 암호화된 세션키를 서버로 전송한다.
-    send : pszEncSessionKey;
-    
-    
     // 세션키로 데이터를 암호화 한다.
     nRv = MagicSE_MakeSessionKey( pszServerCert, &pszSessionKey );
-    printf( "MagicSE_MakeSessionKey : %d, %s\n", nRv, pszSessionKey );
-    if( nRv != MAGICSE_OK )	goto	Finally;
-    nRv = MagicSE_EncData( pszSessionKey, (unsigned char*)szPlainData1, strlen(szPlainData1), &pszEncData1 );
-    printf( "MagicSE_EncData1 : %d, %s\n", nRv, pszEncData1 );
-    if( nRv != MAGICSE_OK )	goto	Finally;
     
+    nRv = MagicSE_EncData( pszSessionKey, (unsigned char*)cfilename, strlen(cfilename), &pszEncData1 );
     
-    
-    // 세션키로 암호화된 데이터를 서버로 전송한다.
-    // send : pszEncData1
-    
-    // 서버로부터 암호화 데이터를 수신한다.
-    // recv : pszEncData1
-    
-    
-    // 세션키로 암호화 데이터를 복호화 한다.
-    nRv = MagicSE_DecData( pszSessionKey, pszEncData1, &pPlainText1, &nPlainTextLen1 );
-    printf( "MagicSE_DecData1 : %d, %s\n", nRv, (char*)pPlainText1 );
-    if( nRv != MAGICSE_OK )	goto	Finally;
-    
-    // 세션키로 데이터를 암호화 한다.
-    nRv = MagicSE_MakeSessionKey( pszServerCert, &pszSessionKey );
-    printf( "MagicSE_MakeSessionKey : %d, %s\n", nRv, pszSessionKey );
-    if( nRv != MAGICSE_OK )	goto	Finally;
-    nRv = MagicSE_EncData( pszSessionKey, (unsigned char*)szPlainData2, strlen(szPlainData2), &pszEncData2 );
-    printf( "MagicSE_EncData2 : %d, %s\n", nRv, pszEncData2 );
-    if( nRv != MAGICSE_OK )	goto	Finally;
-    
-    
-    // 세션키로 암호화된 데이터를 서버로 전송한다.
-//    send : pszEncData2;
-    
-    // 서버로부터 암호화 데이터를 수신한다.
-//    recv : pszEncData2;
-    
-    
-    // 세션키로 암호화 데이터를 복호화 한다.
-    nRv = MagicSE_DecData( pszSessionKey, pszEncData2, &pPlainText2, &nPlainTextLen2 );
-    printf( "MagicSE_DecData2 : %d, %s\n", nRv, (char*)pPlainText2 );
-    if( nRv != MAGICSE_OK )	goto	Finally;
+    str = [NSString stringWithUTF8String: (char *)pszEncData1];
     
 Finally:
-    MagicSE_FreeData( (void**)&pPlainText1 );
-    MagicSE_FreeData( (void**)&pPlainText2 );
-    MagicSE_FreeData( (void**)&pszSessionKey );
-    MagicSE_FreeData( (void**)&pszEncSessionKey );
-    MagicSE_FreeData( (void**)&pszEncData1 );
-    MagicSE_FreeData( (void**)&pszEncData2 );
+    //MagicSE_FreeData( (void**)&pszSessionKey );
+    //MagicSE_FreeData( (void**)&pszEncSessionKey );
+    //MagicSE_FreeData( (void**)&pszEncData1 );
+    //MagicSE_FreeData( (void**)&pszEncData2 );
 
     return str;
 }
 
 -(NSString *) MAGIC_DEC:(NSString *)str
 {
-    //    *pPlainText1 = *(unsigned char *) [str cStringUsingEncoding:NSASCIIStringEncoding];
+    char *cfilename = (char *)[str UTF8String];
     
-    char 			szPlainData1[] = "This is test1", szPlainData2[] = "This is test2";
-    unsigned char	*pPlainText1 = 0x00, *pPlainText2 = 0x00;
-    char			szVersion[12] = {0, }, *pszServerCert = 0x00, *pszSessionKey = 0x00, *pszEncSessionKey = 0x00,
-    *pszEncData1 = 0x00, *pszEncData2 = 0x00;
-    int				nRv = 0, nPlainTextLen1 = 0, nPlainTextLen2 = 0;
-    
-    // 서버로부터 서버 인증서를 수신한다.
-    // recv : pszServerCert
-    pszServerCert = (char*)"000001288ZEACAQADAAAAAQAAMDAwMDAwODcxMIIDYzCCAkugAwIBAgIBAjANBgkqhkiG9w0BAQsFADBdMQswCQYDVQQGEwJLUjEWMBQGA1UECgwNRHJlYW1TZWN1cml0eTESMBAGA1UECwwJTWFnaWNTRXYyMSIwIAYDVQQDDBlEcmVhbVNlY3VyaXR5IHJvb3RDQSAyMDQ4MB4XDTEyMDMyMDA3MTAyM1oXDTIyMDMyMDA3MTAyM1oweTELMAkGA1UEBhMCa3IxFjAUBgNVBAoMDWRyZWFtc2VjdXJpdHkxGzAZBgNVBAsMEm1vYmlsZV9tYWdpY3NldjIuMDE1MDMGA1UEAwws6rWQ6rO867aA66qo67CU7J287Jik7ZS87Iqk6riw67CY6rWs7LaVXzIwNDgwggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQCyTsbYLTeLA/Gko6sTgxLjlfPr9YdeZTD5twNAqBQ40DVtsX1rG+uPHcILN9SmwM6dbLLvimeZvKTNH5z3SXOiFCM+bTm0WvaWpbaQozLPU4xlalhKisE61AL70AR5wtaZtVaBWj1s+/cYE0Z7LjSlhoBvkFowfov/BhhPJTEpc/qnRt2Wrb+4BrfDJayPRZQUJbJlUpPX3+ASHV7o0r3kfY9Dh2wPwyHP7x66EGWElt/sZdt38AGh1zh7bG9LG7ZmvIz9LDjhSoEtSFu9AncKwSRxNC+y9qal99ILcupUQW3KnS9CejI3B5TMzGtGON1L+O+v8+WefJV+l+ezApNhAgMBAAGjEjAQMA4GA1UdDwEB/wQEAwIFIDANBgkqhkiG9w0BAQsFAAOCAQEAvSsXwrJyZWwxBRXsZxGtTcG1xv2iwdmDQ0QHcSJEPNS2l/taykHEYkz7eyOeuT7YO4n/8Bovm11kUirSxS0PnTtU7KSTX7B9ik6of0BO8A0HiYWaUhLspnstp/qYTZ18NZ6lZFVzBs0s/lMLKZ+Nc6nEbjj+p/MMRmVXdt583/KiLjFspFX3M9W22vm7OaKXoRzjPXE7SHidR04fNo6wK9wwwcRZ4HALDCUZOSFBDsudvoDgDZOOFeO4XsP9WXIcArl2KBg8kFnbEIbHCkulKxL2ZMk1tJl3T9RiRZ+0e8qoasLostDrlG/s0ME+5gtcExfwafQgEqf7bYD5r9rwcAACAAAwMDAwMDAwNDABAAAAAAAAAAAAAAAAAAAAAAAAAPzfKXiFXFuO+teWsAEJ/rY+THfTgLdfOW0KgkiG2ood0XCadT4wTFk=";
-    
-    
-    // 세션키를 만든다.
-    nRv = MagicSE_HandShakeSessionKey( pszServerCert, &pszSessionKey, pRootCert, sizeof(pRootCert) );
-    //printf( "MagicSE_HandShakeSessionKey : %d, %s\n", nRv, pszSessionKey );
-    if( nRv != MAGICSE_OK )	goto	Finally;
-    nRv = MagicSE_GetEncSessionKey( pszSessionKey, &pszEncSessionKey );
-    
-    //printf( "MagicSE_GetEncSessionKey : %d, %s\n", nRv, pszEncSessionKey );
+    // 세션키로 암호화 데이터를 복호화 한다.
+    nRv = MagicSE_DecData( pszSessionKey, cfilename, &pPlainText1, &nPlainTextLen1 );
     if( nRv != MAGICSE_OK )	goto	Finally;
     
-    str = [NSString stringWithUTF8String: pszEncSessionKey];
-    
-    // 서버 인증서로 암호화된 세션키를 서버로 전송한다.
-    // send : pszEncSessionKey
-    
-    
-    // 세션키로 데이터를 암호화 한다.
-    //    nRv = MagicSE_MakeSessionKey( pszServerCert, &pszSessionKey );
-    //    printf( "MagicSE_MakeSessionKey : %d, %s\n", nRv, pszSessionKey );
-    //    if( nRv != MAGICSE_OK )	goto	Finally;
-    //    nRv = MagicSE_EncData( pszSessionKey, (unsigned char*)szPlainData1, strlen(szPlainData1), &pszEncData1 );
-    //    printf( "MagicSE_EncData1 : %d, %s\n", nRv, pszEncData1 );
-    //    if( nRv != MAGICSE_OK )	goto	Finally;
-    //
-    //
-    //
-    //    // 세션키로 암호화된 데이터를 서버로 전송한다.
-    //    // send : pszEncData1
-    //
-    //    // 서버로부터 암호화 데이터를 수신한다.
-    //    // recv : pszEncData1
-    //
-    //
-    //    // 세션키로 암호화 데이터를 복호화 한다.
-    //    nRv = MagicSE_DecData( pszSessionKey, pszEncData1, &pPlainText1, &nPlainTextLen1 );
-    //    printf( "MagicSE_DecData1 : %d, %s\n", nRv, (char*)pPlainText1 );
-    //    if( nRv != MAGICSE_OK )	goto	Finally;
-    //
-    //    // 세션키로 데이터를 암호화 한다.
-    //    nRv = MagicSE_MakeSessionKey( pszServerCert, &pszSessionKey );
-    //    printf( "MagicSE_MakeSessionKey : %d, %s\n", nRv, pszSessionKey );
-    //    if( nRv != MAGICSE_OK )	goto	Finally;
-    //    nRv = MagicSE_EncData( pszSessionKey, (unsigned char*)szPlainData2, strlen(szPlainData2), &pszEncData2 );
-    //    printf( "MagicSE_EncData2 : %d, %s\n", nRv, pszEncData2 );
-    //    if( nRv != MAGICSE_OK )	goto	Finally;
-    //
-    //
-    //    // 세션키로 암호화된 데이터를 서버로 전송한다.
-    //    // send : pszEncData2
-    //
-    //    // 서버로부터 암호화 데이터를 수신한다.
-    //    // recv : pszEncData2
-    //
-    //
-    //    // 세션키로 암호화 데이터를 복호화 한다.
-    //    nRv = MagicSE_DecData( pszSessionKey, pszEncData2, &pPlainText2, &nPlainTextLen2 );
-    //    printf( "MagicSE_DecData2 : %d, %s\n", nRv, (char*)pPlainText2 );
-    //    if( nRv != MAGICSE_OK )	goto	Finally;
+    str = [NSString stringWithUTF8String: (char*)pPlainText1];
     
 Finally:
-    MagicSE_FreeData( (void**)&pPlainText1 );
-    MagicSE_FreeData( (void**)&pPlainText2 );
     MagicSE_FreeData( (void**)&pszSessionKey );
     MagicSE_FreeData( (void**)&pszEncSessionKey );
     MagicSE_FreeData( (void**)&pszEncData1 );
@@ -240,93 +122,5 @@ Finally:
     
     return str;
 }
-
-
-
-void CASE_1( )
-{
-    char 			szPlainData1[] = "This is test1", szPlainData2[] = "This is test2";
-    unsigned char	*pPlainText1 = 0x00, *pPlainText2 = 0x00;
-    char			szVersion[12] = {0, }, *pszServerCert = 0x00, *pszSessionKey = 0x00, *pszEncSessionKey = 0x00,
-    *pszEncData1 = 0x00, *pszEncData2 = 0x00;
-    int				nRv = 0, nPlainTextLen1 = 0, nPlainTextLen2 = 0;
-
-    
-    // MagicSE 버전을 가져온다.
-    MagicSE_GetVersion( szVersion );
-    printf( "Version : %s\n", szVersion );
-    
-    
-    // 서버로부터 서버 인증서를 수신한다.
-    // recv : pszServerCert
-    pszServerCert = (char*)"000001288ZEACAQADAAAAAQAAMDAwMDAwODcxMIIDYzCCAkugAwIBAgIBAjANBgkqhkiG9w0BAQsFADBdMQswCQYDVQQGEwJLUjEWMBQGA1UECgwNRHJlYW1TZWN1cml0eTESMBAGA1UECwwJTWFnaWNTRXYyMSIwIAYDVQQDDBlEcmVhbVNlY3VyaXR5IHJvb3RDQSAyMDQ4MB4XDTEyMDMyMDA3MTAyM1oXDTIyMDMyMDA3MTAyM1oweTELMAkGA1UEBhMCa3IxFjAUBgNVBAoMDWRyZWFtc2VjdXJpdHkxGzAZBgNVBAsMEm1vYmlsZV9tYWdpY3NldjIuMDE1MDMGA1UEAwws6rWQ6rO867aA66qo67CU7J287Jik7ZS87Iqk6riw67CY6rWs7LaVXzIwNDgwggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQCyTsbYLTeLA/Gko6sTgxLjlfPr9YdeZTD5twNAqBQ40DVtsX1rG+uPHcILN9SmwM6dbLLvimeZvKTNH5z3SXOiFCM+bTm0WvaWpbaQozLPU4xlalhKisE61AL70AR5wtaZtVaBWj1s+/cYE0Z7LjSlhoBvkFowfov/BhhPJTEpc/qnRt2Wrb+4BrfDJayPRZQUJbJlUpPX3+ASHV7o0r3kfY9Dh2wPwyHP7x66EGWElt/sZdt38AGh1zh7bG9LG7ZmvIz9LDjhSoEtSFu9AncKwSRxNC+y9qal99ILcupUQW3KnS9CejI3B5TMzGtGON1L+O+v8+WefJV+l+ezApNhAgMBAAGjEjAQMA4GA1UdDwEB/wQEAwIFIDANBgkqhkiG9w0BAQsFAAOCAQEAvSsXwrJyZWwxBRXsZxGtTcG1xv2iwdmDQ0QHcSJEPNS2l/taykHEYkz7eyOeuT7YO4n/8Bovm11kUirSxS0PnTtU7KSTX7B9ik6of0BO8A0HiYWaUhLspnstp/qYTZ18NZ6lZFVzBs0s/lMLKZ+Nc6nEbjj+p/MMRmVXdt583/KiLjFspFX3M9W22vm7OaKXoRzjPXE7SHidR04fNo6wK9wwwcRZ4HALDCUZOSFBDsudvoDgDZOOFeO4XsP9WXIcArl2KBg8kFnbEIbHCkulKxL2ZMk1tJl3T9RiRZ+0e8qoasLostDrlG/s0ME+5gtcExfwafQgEqf7bYD5r9rwcAACAAAwMDAwMDAwNDABAAAAAAAAAAAAAAAAAAAAAAAAAPzfKXiFXFuO+teWsAEJ/rY+THfTgLdfOW0KgkiG2ood0XCadT4wTFk=";
-    
-    
-    // 세션키를 만든다.
-    nRv = MagicSE_HandShakeSessionKey( pszServerCert, &pszSessionKey, pRootCert, sizeof(pRootCert) );
-    printf( "MagicSE_HandShakeSessionKey : %d, %s\n", nRv, pszSessionKey );
-    if( nRv != MAGICSE_OK )	goto	Finally;
-    nRv = MagicSE_GetEncSessionKey( pszSessionKey, &pszEncSessionKey );
-    printf( "MagicSE_GetEncSessionKey : %d, %s\n", nRv, pszEncSessionKey );
-    if( nRv != MAGICSE_OK )	goto	Finally;
-    
-    
-    // 서버 인증서로 암호화된 세션키를 서버로 전송한다.
-    // send : pszEncSessionKey
-    
-    
-    // 세션키로 데이터를 암호화 한다.
-    nRv = MagicSE_MakeSessionKey( pszServerCert, &pszSessionKey );
-    printf( "MagicSE_MakeSessionKey : %d, %s\n", nRv, pszSessionKey );
-    if( nRv != MAGICSE_OK )	goto	Finally;
-    nRv = MagicSE_EncData( pszSessionKey, (unsigned char*)szPlainData1, strlen(szPlainData1), &pszEncData1 );
-    printf( "MagicSE_EncData1 : %d, %s\n", nRv, pszEncData1 );
-    if( nRv != MAGICSE_OK )	goto	Finally;
-    
-    
-    // 세션키로 암호화된 데이터를 서버로 전송한다.
-    // send : pszEncData1
-    
-    // 서버로부터 암호화 데이터를 수신한다.
-    // recv : pszEncData1
-    
-    
-    // 세션키로 암호화 데이터를 복호화 한다.
-    nRv = MagicSE_DecData( pszSessionKey, pszEncData1, &pPlainText1, &nPlainTextLen1 );
-    printf( "MagicSE_DecData1 : %d, %s\n", nRv, (char*)pPlainText1 );
-    if( nRv != MAGICSE_OK )	goto	Finally;
-    
-    // 세션키로 데이터를 암호화 한다.
-    nRv = MagicSE_MakeSessionKey( pszServerCert, &pszSessionKey );
-    printf( "MagicSE_MakeSessionKey : %d, %s\n", nRv, pszSessionKey );
-    if( nRv != MAGICSE_OK )	goto	Finally;
-    nRv = MagicSE_EncData( pszSessionKey, (unsigned char*)szPlainData2, strlen(szPlainData2), &pszEncData2 );
-    printf( "MagicSE_EncData2 : %d, %s\n", nRv, pszEncData2 );
-    if( nRv != MAGICSE_OK )	goto	Finally;
-    
-    
-    // 세션키로 암호화된 데이터를 서버로 전송한다.
-    // send : pszEncData2
-    
-    // 서버로부터 암호화 데이터를 수신한다.
-    // recv : pszEncData2
-    
-    
-    // 세션키로 암호화 데이터를 복호화 한다.
-    nRv = MagicSE_DecData( pszSessionKey, pszEncData2, &pPlainText2, &nPlainTextLen2 );
-    printf( "MagicSE_DecData2 : %d, %s\n", nRv, (char*)pPlainText2 );
-    if( nRv != MAGICSE_OK )	goto	Finally;
-    
-Finally:
-    MagicSE_FreeData( (void**)&pPlainText1 );
-    MagicSE_FreeData( (void**)&pPlainText2 );
-    MagicSE_FreeData( (void**)&pszSessionKey );
-    MagicSE_FreeData( (void**)&pszEncSessionKey );
-    MagicSE_FreeData( (void**)&pszEncData1 );
-    MagicSE_FreeData( (void**)&pszEncData2 );
-}
-
-
-
 
 @end
