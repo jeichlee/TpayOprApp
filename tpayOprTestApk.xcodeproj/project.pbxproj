@@ -148,6 +148,7 @@
 		EFC9C4A21E7595B9006378CD /* UIWebView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = EFC9C4931E7595B9006378CD /* UIWebView+AFNetworking.m */; };
 		EFC9C4D71E7A65CC006378CD /* HTTPClient.m in Sources */ = {isa = PBXBuildFile; fileRef = EFC9C4D61E7A65CC006378CD /* HTTPClient.m */; };
 		EFC9C4DD1E7A78D5006378CD /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = EFC9C4DC1E7A78D5006378CD /* MBProgressHUD.m */; };
+		EFCFC3231E885402005A7D49 /* MagicSEUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = EFCFC3221E885402005A7D49 /* MagicSEUtil.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -331,6 +332,8 @@
 		EFC9C4D61E7A65CC006378CD /* HTTPClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HTTPClient.m; sourceTree = "<group>"; };
 		EFC9C4DB1E7A78D5006378CD /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
 		EFC9C4DC1E7A78D5006378CD /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
+		EFCFC3211E885402005A7D49 /* MagicSEUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MagicSEUtil.h; sourceTree = "<group>"; };
+		EFCFC3221E885402005A7D49 /* MagicSEUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MagicSEUtil.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -371,6 +374,8 @@
 			children = (
 				62F5A49F1E800E4700F06F5D /* NSString+MagicSEUtil.h */,
 				62F5A4A01E800E4700F06F5D /* NSString+MagicSEUtil.mm */,
+				EFCFC3211E885402005A7D49 /* MagicSEUtil.h */,
+				EFCFC3221E885402005A7D49 /* MagicSEUtil.m */,
 			);
 			name = MagicSEUtil;
 			sourceTree = "<group>";
@@ -953,6 +958,7 @@
 				EFC9C49D1E7595B9006378CD /* UIActivityIndicatorView+AFNetworking.m in Sources */,
 				EFC9C4961E7595B9006378CD /* AFSecurityPolicy.m in Sources */,
 				EFC9C4A21E7595B9006378CD /* UIWebView+AFNetworking.m in Sources */,
+				EFCFC3231E885402005A7D49 /* MagicSEUtil.m in Sources */,
 				EFC9C4471E6EEE33006378CD /* LoadingViewController.m in Sources */,
 				62F8B7D31E7115F200EA70F3 /* ContactSelectView.m in Sources */,
 				62F8B7C71E6FE5E000EA70F3 /* DownPicker.m in Sources */,

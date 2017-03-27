@@ -11,5 +11,7 @@
 @interface NSString (Common)
 
 -(NSString *) getProperty:(NSString *)pName;
+-(char *) NSStringToChar:(NSString *)str;
+-(NSString *) CharToNSString:(char *)ch;
 
 @end

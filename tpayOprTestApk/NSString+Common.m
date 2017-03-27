@@ -27,4 +27,14 @@
     return pVal;
 }
 
+-(char *) NSStringToChar:(NSString *)str
+{
+    return strdup([str UTF8String]);
+}
+
+-(NSString *) CharToNSString:(char *)ch
+{
+    return [NSString stringWithFormat:@"%s", ch];
+}
+
 @end
