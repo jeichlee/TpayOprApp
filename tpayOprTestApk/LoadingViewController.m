@@ -10,8 +10,8 @@
 #import "AppTestViewController.h"
 #import "AFNetworking.h"
 #import "HTTPClient.h"
-#import "UserInfo.h"
 #import "NSString+MagicSEUtil.h"
+#import "MagicSEUtil.h"
 
 @interface LoadingViewController ()
 
@@ -58,21 +58,30 @@
 }
 
 
--(void)HTTPClient:(HTTPClient *)sharedHTTPClient didSucceedWithResponse:(id)responseObject
+-(void)HTTPClient:(HTTPClient *)sharedHTTPClient didSucceedWithResponse:(NSMutableDictionary *)responseObject
 {
+    NSLog(@"didSucceedWithResponse | LoadingViewController");
     [self testProgress:0.50];
-    NSMutableDictionary *dir = [NSJSONSerialization JSONObjectWithData:responseObject options:0 error:nil];
-    NSLog(@"%@", dir);
-    //todo: header값을 못불러 오겠다...
+//    NSLog(@"###%@", responseObject);
+//    NSLog(@"###%@", [responseObject objectForKey:@"Header"]);
     
-    if([[dir objectForKey:@"RESULT_CODE"] isEqualToString:@"0"])
+    NSDictionary *header = (NSDictionary *)[responseObject objectForKey:@"header"];
+    NSDictionary *body = (NSDictionary *)[responseObject objectForKey:@"body"];
+    NSLog(@"HEADER %@", header);
+    NSLog(@"BODY %@", body);
+    
+    if([[body objectForKey:@"RESULT_CODE"] isEqualToString:@"0"])
     {
         //MDNSearch성공 - MDN 기준으로 MDNSearchForOpr 처리시작
-        NSLog(@"[MDNSearchForOpr 성공] MDN=%@", [dir objectForKey:@"MDN"]);
-        UserInfo *user = [[UserInfo alloc] init];
-        [UserInfo setUserMdn:[dir objectForKey:@"MDN"]];
-        
+        NSLog(@"[MDNSearchForOpr 성공] MDN=%@", [body objectForKey:@"MDN"]);
         [self testProgress:1.00];
+        
+
+        
+        MagicSEUtilTest *util = [[MagicSEUtilTest alloc] init];
+        [util INN_SecurityCertificate];
+        
+        
         //Page 이동
         [NSThread sleepForTimeInterval:1];
         UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
