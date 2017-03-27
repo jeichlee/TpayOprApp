@@ -48,7 +48,7 @@ static NSString *baseURL = @"http://61.250.22.44:8001/app/handler/";
 
 
 // HTTP 요청에 대한 응답 콜백을 HTTPClient Delegate에게 포워딩(Success시) - 해당 이벤트 시 구현은 각 viewController에서 구현
--(void (^)(NSURLSessionDataTask *task, id responseObject))successBlock {
+-(void (^)(NSURLSessionDataTask *task, id responseObject))successBlock:progressBackground {
     return ^(NSURLSessionDataTask *task, id responseObject){
         NSHTTPURLResponse *response = ((NSHTTPURLResponse *)[task response]);
         NSDictionary *header = [response allHeaderFields];
@@ -57,27 +57,29 @@ static NSString *baseURL = @"http://61.250.22.44:8001/app/handler/";
         [responseHeaderAndBody setObject:header forKey:@"header"];
         [responseHeaderAndBody setObject:body forKey:@"body"];
         
-//        NSLog(@"%@", [self.delegate respondsToSelector:@selector(HTTPClient:didSucceedWithResponse:)]);
-        NSLog(@"%@", self.delegate);
         if([self.delegate respondsToSelector:@selector(HTTPClient:didSucceedWithResponse:)]) {
             [self.delegate HTTPClient:self didSucceedWithResponse:responseHeaderAndBody];
         } else {
             NSLog(@"Delegate do not response success service");
         }
-//       [MBProgressHUD hideHUDForView:progressBackground animated:YES];
+        if(progressBackground != nil){
+            [MBProgressHUD hideHUDForView:progressBackground animated:YES];
+        }
     };
 }
 
 
 // HTTP 요청에 대한 응답 콜백을 HTTPClient Delegate에게 포워딩(Fail시) - 해당 이벤트 시 구현은 각 viewController에서 구현
--(void (^)(NSURLSessionDataTask *task, NSError * error))failBlock {
+-(void (^)(NSURLSessionDataTask *task, NSError * error))failBlock:progressBackground {
     return ^(NSURLSessionDataTask *task, NSError *error){
         if([self.delegate respondsToSelector:@selector(HTTPClient:didFailWithError:)]) {
             [self.delegate HTTPClient:self didFailWithError:error];
         } else {
             NSLog(@"Delegate do not response failed service");
         }
-//        [MBProgressHUD hideHUDForView:progressBackground animated:YES];
+        if(progressBackground != nil){
+            [MBProgressHUD hideHUDForView:progressBackground animated:YES];
+        }
     };
 }
 
@@ -92,8 +94,10 @@ static NSString *baseURL = @"http://61.250.22.44:8001/app/handler/";
     UIView *progressBackground = [[UIView alloc] init];
     if ([self.delegate isKindOfClass:[UIViewController class]] == 1){
         progressBackground = [(UIViewController *)self.delegate view];
-    }else {
+    }else if([self.delegate isKindOfClass:[UIView class]] == 1){
         progressBackground = (UIView *)self.delegate;
+    }else {
+        progressBackground = [[UIView alloc] init];
     }
     
     [MBProgressHUD showHUDAddedTo:progressBackground animated:YES];

@@ -10,8 +10,9 @@
 
 @interface NSString (Common)
 
--(NSString *) getProperty:(NSString *)pName;
+-(NSString *) getProperty;
 -(char *) NSStringToChar:(NSString *)str;
 -(NSString *) CharToNSString:(char *)ch;
+-(NSArray *) getKeys;
 
 @end

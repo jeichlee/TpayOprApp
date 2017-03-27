@@ -10,12 +10,9 @@
 #import "HTTPClient.h"
 #import <UIKit/UIKit.h>
 
-@interface MagicSEUtilTest : NSObject
-{
-    id<HTTPClientDelegate> _delegate;
-}
+@interface MagicSEUtilTest : UIView <HTTPClientDelegate>
 
-@property(strong, nonatomic) id<HTTPClientDelegate> delegate;
+//@property(strong, nonatomic) id<HTTPClientDelegate> delegate;
 //@property(nonatomic, copy) void (^didSucceedWithResponse)(NSMutableDictionary *);
 //@property(nonatomic, copy) void (^didFailWithError)(NSError *);
 
@@ -30,7 +27,7 @@
 -(void)         INN_SecurityCertificate;                // 서버 호출하여 인증서 수신
 -(void)         INN_SessionInitialize;
 
--(void)HTTPClient:(HTTPClient *)sharedHTTPClient didSucceedWithResponse:(NSMutableDictionary *)responseObject;
+//-(void)HTTPClient:(HTTPClient *)sharedHTTPClient didSucceedWithResponse:(NSMutableDictionary *)responseObject;
 
 
 

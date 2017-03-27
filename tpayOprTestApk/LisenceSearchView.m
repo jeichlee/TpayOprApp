@@ -32,7 +32,7 @@
     // 사용자가 설정한 URL로 변경한다.
     [HTTPClient setBaseURL: cHeader.serverHost];
     
-    HTTPClient *client = [HTTPClient sharedHTTPClient];
+    HTTPClient *client = [HTTPClient sharedHTTPClient:nil];
     [client setDelegate:self];
     
     [client serverAPICall:params andURL:@"App-LisenceSearch"];

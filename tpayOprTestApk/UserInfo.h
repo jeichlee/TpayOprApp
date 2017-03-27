@@ -12,6 +12,8 @@
 
 static NSMutableArray *userMdnArray;
 static NSString *userDeviceId;
+static NSString *securetyCert;
+static NSString *jsessionId;
 
 @interface UserInfo : NSObject
 
@@ -19,8 +21,12 @@ static NSString *userDeviceId;
 +(NSString *) getUserMdn:(int) index;
 +(NSMutableArray *) getUserAllMdn;
 +(NSString *) getUserDeviceId;
++(NSString *) getSecurityCert;
++(NSString *) getJsessionId;
 
 +(void) setUserMdn:(NSString *)mdn;
++(void) setSecurityCert:(NSString *)cert;
++(void) setJsessionId:(NSString *)session;
 +(void) setUserDeviceId:(NSString *)deviceId;
 
 +(BOOL) removeUserMdn:(int) index targetMdn:(NSString *)mdn;

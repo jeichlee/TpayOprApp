@@ -8,9 +8,12 @@
 
 #import "MagicSEUtil.h"
 #import "HTTPClient.h"
+#import "UserInfo.h"
 
 @interface MagicSEUtilTest()
-
+{
+    char callType; // 'C' : SecurityCertificate, 'I' : SessionInitialize
+}
 @end
 
 @implementation MagicSEUtilTest
@@ -28,13 +31,6 @@
 
 -(NSString *) MSE_Init
 {
-    return nil;
-}
-
--(id) init
-{
-    MagicSEUtilTest *MT = [[MagicSEUtilTest alloc]init];
-//    MT.d
     return nil;
 }
 
@@ -67,6 +63,8 @@
 -(void)         INN_SecurityCertificate
 {
     NSLog(@"INN_SecurityCertificate");
+    callType = 'C';
+    
     HTTPClient *client = [HTTPClient sharedHTTPClient:nil];
     [client setDelegate:self];
     
@@ -75,21 +73,38 @@
 
 -(void)         INN_SessionInitialize
 {
+    NSLog(@"INN_SessionInitialize");
+    callType = 'I';
     
+    HTTPClient *client = [HTTPClient sharedHTTPClient:nil];
+    [client setDelegate:self];
+    
+    [client serverAPICall:nil andURL:@"App-SessionInitialize"];
 }
 
 -(void)HTTPClient:(HTTPClient *)sharedHTTPClient didSucceedWithResponse:(NSMutableDictionary *)responseObject
 {
     NSLog(@"didSucceedWithResponse | MagicSEUtil");
-//    resultDict = nil;
-//    resultDict = responseObject;
     
-//    progress_yn = NO;
+    
+    NSDictionary *header = (NSDictionary *)[responseObject objectForKey:@"header"];
+    NSDictionary *body = (NSDictionary *)[responseObject objectForKey:@"body"];
+    NSLog(@"HEADER %@", header);
+    NSLog(@"BODY %@", body);
+    
+    if (callType == 'C'){
+        [UserInfo setSecurityCert:[body objectForKey:@"SECURITY_CERTIFICATE"]];
+    }
+    else if (callType == 'I'){
+        
+    }
+    
 }
 
 -(void)HTTPClient:(HTTPClient *)sharedHTTPClient didFailWithError:(NSError *)error
 {
-    NSLog(@"didFailWithError | MagicSEUtil");
-//    progr
+    NSLog(@"didFailWithError | MagicSEUtil : %@", [error localizedDescription]);
+    
+    exit(0);
 }
 @end

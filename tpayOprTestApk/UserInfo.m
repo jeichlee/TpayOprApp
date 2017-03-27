@@ -24,6 +24,10 @@
         userDeviceId = [[NSString alloc] init];
     }
     
+    if(securetyCert == nil || [securetyCert isEqual: @""]){
+        securetyCert = [[NSString alloc] init];
+    }
+    
     return self;
 }
 
@@ -117,6 +121,34 @@
     userMdnArray = [[NSMutableArray alloc] init];
     
     return YES;
+}
+
+/* ********************************************
+ securetyCertificate 정보를 세팅한다.
+ ******************************************** */
++(void) setSecurityCert:(NSString *)cert{
+    securetyCert = cert;
+}
+
+/* ********************************************
+ securetyCertificate 정보를 가져온다.
+ ******************************************** */
++(NSString *) getSecurityCert{
+    return securetyCert;
+}
+
+/* ********************************************
+ securetyCertificate 정보를 세팅한다.
+ ******************************************** */
++(void) setJsessionId:(NSString *)session{
+    jsessionId = session;
+}
+
+/* ********************************************
+ securetyCertificate 정보를 가져온다.
+ ******************************************** */
++(NSString *) getJsessionId{
+    return jsessionId;
 }
 
 @end

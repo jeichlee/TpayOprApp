@@ -12,6 +12,7 @@
 #import "HTTPClient.h"
 #import "NSString+MagicSEUtil.h"
 #import "MagicSEUtil.h"
+#import "UserInfo.h"
 
 @interface LoadingViewController ()
 
@@ -30,7 +31,7 @@
     [self testProgress:0.00];
     
     
-    HTTPClient *client = [HTTPClient sharedHTTPClient];
+    HTTPClient *client = [HTTPClient sharedHTTPClient:nil];
     [client setDelegate:self];
     [client serverAPICall:nil andURL:@"App-MDNSearchForOpr"];
     
@@ -76,6 +77,8 @@
         NSLog(@"[MDNSearchForOpr 성공] MDN=%@", [body objectForKey:@"MDN"]);
         [self testProgress:1.00];
         
+        UserInfo *user = [[UserInfo alloc] init];
+        [UserInfo setUserMdn:[body objectForKey:@"MDN"]];
 
         
         MagicSEUtilTest *util = [[MagicSEUtilTest alloc] init];
