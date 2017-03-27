@@ -8,8 +8,24 @@
 
 #import "NSString+MagicSEUtil.h"
 #include "MagicSE2.h"
+#import "HTTPClient.h"
+#import "AFNetworking.h"
 
-@implementation NSString (MagicSEUtil)
+@interface MagicSEUtil()
+
+@end
+
+
+
+static NSString *jsession_id = nil;
+static NSString *_dec_mse_session_key = nil;
+
+
+@implementation MagicSEUtil
+
+// 전역 변수 선언
+BOOL progress_yn = NO;
+NSMutableDictionary *resultDict = nil;
 
 
 
@@ -70,261 +86,180 @@ unsigned char pRootCert[] = {
     0x6C,0x10,0xD6,0xEA,0x92,0x36,0xCC,0xD6,0xE2,0x24,0xC7,0x04,0x6A,0xC5,0x59
 };
 
+unsigned char
+*pPlainText1 = 0x00, *pPlainText2 = 0x00;
+char
+szVersion[12] = {0, }, *pszServerCert = 0x00, *pszSessionKey = 0x00, *pszEncSessionKey = 0x00,
+*pszEncString = 0x00, *pszDecString = 0x00;
+int
+nRv = 0, nPlainTextLen1 = 0, nPlainTextLen2 = 0;
 
 
 
--(NSString *) MAGIC_ENC:(NSString *)str
+-(NSString *) MSE_Init
 {
-    //    *pPlainText1 = *(unsigned char *) [str cStringUsingEncoding:NSASCIIStringEncoding];
-    
-    char 			szPlainData1[] = "This is test1", szPlainData2[] = "This is test2";
-    unsigned char	*pPlainText1 = 0x00, *pPlainText2 = 0x00;
-    char			szVersion[12] = {0, }, *pszServerCert = 0x00, *pszSessionKey = 0x00, *pszEncSessionKey = 0x00,
-    *pszEncData1 = 0x00, *pszEncData2 = 0x00;
-    int				nRv = 0, nPlainTextLen1 = 0, nPlainTextLen2 = 0;
-    
-    // 서버로부터 서버 인증서를 수신한다.
-    // recv : pszServerCert
-    pszServerCert = (char*)"000001288ZEACAQADAAAAAQAAMDAwMDAwODcxMIIDYzCCAkugAwIBAgIBAjANBgkqhkiG9w0BAQsFADBdMQswCQYDVQQGEwJLUjEWMBQGA1UECgwNRHJlYW1TZWN1cml0eTESMBAGA1UECwwJTWFnaWNTRXYyMSIwIAYDVQQDDBlEcmVhbVNlY3VyaXR5IHJvb3RDQSAyMDQ4MB4XDTEyMDMyMDA3MTAyM1oXDTIyMDMyMDA3MTAyM1oweTELMAkGA1UEBhMCa3IxFjAUBgNVBAoMDWRyZWFtc2VjdXJpdHkxGzAZBgNVBAsMEm1vYmlsZV9tYWdpY3NldjIuMDE1MDMGA1UEAwws6rWQ6rO867aA66qo67CU7J287Jik7ZS87Iqk6riw67CY6rWs7LaVXzIwNDgwggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQCyTsbYLTeLA/Gko6sTgxLjlfPr9YdeZTD5twNAqBQ40DVtsX1rG+uPHcILN9SmwM6dbLLvimeZvKTNH5z3SXOiFCM+bTm0WvaWpbaQozLPU4xlalhKisE61AL70AR5wtaZtVaBWj1s+/cYE0Z7LjSlhoBvkFowfov/BhhPJTEpc/qnRt2Wrb+4BrfDJayPRZQUJbJlUpPX3+ASHV7o0r3kfY9Dh2wPwyHP7x66EGWElt/sZdt38AGh1zh7bG9LG7ZmvIz9LDjhSoEtSFu9AncKwSRxNC+y9qal99ILcupUQW3KnS9CejI3B5TMzGtGON1L+O+v8+WefJV+l+ezApNhAgMBAAGjEjAQMA4GA1UdDwEB/wQEAwIFIDANBgkqhkiG9w0BAQsFAAOCAQEAvSsXwrJyZWwxBRXsZxGtTcG1xv2iwdmDQ0QHcSJEPNS2l/taykHEYkz7eyOeuT7YO4n/8Bovm11kUirSxS0PnTtU7KSTX7B9ik6of0BO8A0HiYWaUhLspnstp/qYTZ18NZ6lZFVzBs0s/lMLKZ+Nc6nEbjj+p/MMRmVXdt583/KiLjFspFX3M9W22vm7OaKXoRzjPXE7SHidR04fNo6wK9wwwcRZ4HALDCUZOSFBDsudvoDgDZOOFeO4XsP9WXIcArl2KBg8kFnbEIbHCkulKxL2ZMk1tJl3T9RiRZ+0e8qoasLostDrlG/s0ME+5gtcExfwafQgEqf7bYD5r9rwcAACAAAwMDAwMDAwNDABAAAAAAAAAAAAAAAAAAAAAAAAAPzfKXiFXFuO+teWsAEJ/rY+THfTgLdfOW0KgkiG2ood0XCadT4wTFk=";
-    
-    
-    // 세션키를 만든다.
-    nRv = MagicSE_HandShakeSessionKey( pszServerCert, &pszSessionKey, pRootCert, sizeof(pRootCert) );
-    printf( "MagicSE_HandShakeSessionKey : %d, %s\n", nRv, pszSessionKey );
-    if( nRv != MAGICSE_OK )	goto	Finally;
-    nRv = MagicSE_GetEncSessionKey( pszSessionKey, &pszEncSessionKey );
-    
-    printf( "MagicSE_GetEncSessionKey : %d, %s\n", nRv, pszEncSessionKey );
-    if( nRv != MAGICSE_OK )	goto	Finally;
-    
-    str = [NSString stringWithUTF8String: pszEncSessionKey];
-    
-    // 서버 인증서로 암호화된 세션키를 서버로 전송한다.
-    send : pszEncSessionKey;
-    
-    
-    // 세션키로 데이터를 암호화 한다.
-    nRv = MagicSE_MakeSessionKey( pszServerCert, &pszSessionKey );
-    printf( "MagicSE_MakeSessionKey : %d, %s\n", nRv, pszSessionKey );
-    if( nRv != MAGICSE_OK )	goto	Finally;
-    nRv = MagicSE_EncData( pszSessionKey, (unsigned char*)szPlainData1, strlen(szPlainData1), &pszEncData1 );
-    printf( "MagicSE_EncData1 : %d, %s\n", nRv, pszEncData1 );
-    if( nRv != MAGICSE_OK )	goto	Finally;
-    
-    
-    
-    // 세션키로 암호화된 데이터를 서버로 전송한다.
-    // send : pszEncData1
-    
-    // 서버로부터 암호화 데이터를 수신한다.
-    // recv : pszEncData1
-    
-    
-    // 세션키로 암호화 데이터를 복호화 한다.
-    nRv = MagicSE_DecData( pszSessionKey, pszEncData1, &pPlainText1, &nPlainTextLen1 );
-    printf( "MagicSE_DecData1 : %d, %s\n", nRv, (char*)pPlainText1 );
-    if( nRv != MAGICSE_OK )	goto	Finally;
-    
-    // 세션키로 데이터를 암호화 한다.
-    nRv = MagicSE_MakeSessionKey( pszServerCert, &pszSessionKey );
-    printf( "MagicSE_MakeSessionKey : %d, %s\n", nRv, pszSessionKey );
-    if( nRv != MAGICSE_OK )	goto	Finally;
-    nRv = MagicSE_EncData( pszSessionKey, (unsigned char*)szPlainData2, strlen(szPlainData2), &pszEncData2 );
-    printf( "MagicSE_EncData2 : %d, %s\n", nRv, pszEncData2 );
-    if( nRv != MAGICSE_OK )	goto	Finally;
-    
-    
-    // 세션키로 암호화된 데이터를 서버로 전송한다.
-//    send : pszEncData2;
-    
-    // 서버로부터 암호화 데이터를 수신한다.
-//    recv : pszEncData2;
-    
-    
-    // 세션키로 암호화 데이터를 복호화 한다.
-    nRv = MagicSE_DecData( pszSessionKey, pszEncData2, &pPlainText2, &nPlainTextLen2 );
-    printf( "MagicSE_DecData2 : %d, %s\n", nRv, (char*)pPlainText2 );
-    if( nRv != MAGICSE_OK )	goto	Finally;
-    
-Finally:
-    MagicSE_FreeData( (void**)&pPlainText1 );
-    MagicSE_FreeData( (void**)&pPlainText2 );
-    MagicSE_FreeData( (void**)&pszSessionKey );
-    MagicSE_FreeData( (void**)&pszEncSessionKey );
-    MagicSE_FreeData( (void**)&pszEncData1 );
-    MagicSE_FreeData( (void**)&pszEncData2 );
-
-    return str;
+    @synchronized (self)
+    {
+        if(_dec_mse_session_key == nil)
+        {
+            NSLog(@"_dec_mse_session_key=nil, Handshake Process start");
+            [self INN_MSE_Handshake];
+        }
+    }
+    return _dec_mse_session_key;
 }
 
--(NSString *) MAGIC_DEC:(NSString *)str
+
+-(NSString *) MSE_Enc:(NSString *)pureStr
 {
-    //    *pPlainText1 = *(unsigned char *) [str cStringUsingEncoding:NSASCIIStringEncoding];
+    NSLog(@"### MSE_Enc");
+    NSString *session_key = [self MSE_Init];
+   
+    NSLog(@"암호화 전 STR= %@", pureStr);
+    NSLog(@"Session Key= %@", session_key);
     
-    char 			szPlainData1[] = "This is test1", szPlainData2[] = "This is test2";
-    unsigned char	*pPlainText1 = 0x00, *pPlainText2 = 0x00;
-    char			szVersion[12] = {0, }, *pszServerCert = 0x00, *pszSessionKey = 0x00, *pszEncSessionKey = 0x00,
-    *pszEncData1 = 0x00, *pszEncData2 = 0x00;
-    int				nRv = 0, nPlainTextLen1 = 0, nPlainTextLen2 = 0;
+    pszSessionKey = (char *)[session_key UTF8String];
+    pszDecString = (char *)[pureStr UTF8String];
     
-    // 서버로부터 서버 인증서를 수신한다.
-    // recv : pszServerCert
-    pszServerCert = (char*)"000001288ZEACAQADAAAAAQAAMDAwMDAwODcxMIIDYzCCAkugAwIBAgIBAjANBgkqhkiG9w0BAQsFADBdMQswCQYDVQQGEwJLUjEWMBQGA1UECgwNRHJlYW1TZWN1cml0eTESMBAGA1UECwwJTWFnaWNTRXYyMSIwIAYDVQQDDBlEcmVhbVNlY3VyaXR5IHJvb3RDQSAyMDQ4MB4XDTEyMDMyMDA3MTAyM1oXDTIyMDMyMDA3MTAyM1oweTELMAkGA1UEBhMCa3IxFjAUBgNVBAoMDWRyZWFtc2VjdXJpdHkxGzAZBgNVBAsMEm1vYmlsZV9tYWdpY3NldjIuMDE1MDMGA1UEAwws6rWQ6rO867aA66qo67CU7J287Jik7ZS87Iqk6riw67CY6rWs7LaVXzIwNDgwggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQCyTsbYLTeLA/Gko6sTgxLjlfPr9YdeZTD5twNAqBQ40DVtsX1rG+uPHcILN9SmwM6dbLLvimeZvKTNH5z3SXOiFCM+bTm0WvaWpbaQozLPU4xlalhKisE61AL70AR5wtaZtVaBWj1s+/cYE0Z7LjSlhoBvkFowfov/BhhPJTEpc/qnRt2Wrb+4BrfDJayPRZQUJbJlUpPX3+ASHV7o0r3kfY9Dh2wPwyHP7x66EGWElt/sZdt38AGh1zh7bG9LG7ZmvIz9LDjhSoEtSFu9AncKwSRxNC+y9qal99ILcupUQW3KnS9CejI3B5TMzGtGON1L+O+v8+WefJV+l+ezApNhAgMBAAGjEjAQMA4GA1UdDwEB/wQEAwIFIDANBgkqhkiG9w0BAQsFAAOCAQEAvSsXwrJyZWwxBRXsZxGtTcG1xv2iwdmDQ0QHcSJEPNS2l/taykHEYkz7eyOeuT7YO4n/8Bovm11kUirSxS0PnTtU7KSTX7B9ik6of0BO8A0HiYWaUhLspnstp/qYTZ18NZ6lZFVzBs0s/lMLKZ+Nc6nEbjj+p/MMRmVXdt583/KiLjFspFX3M9W22vm7OaKXoRzjPXE7SHidR04fNo6wK9wwwcRZ4HALDCUZOSFBDsudvoDgDZOOFeO4XsP9WXIcArl2KBg8kFnbEIbHCkulKxL2ZMk1tJl3T9RiRZ+0e8qoasLostDrlG/s0ME+5gtcExfwafQgEqf7bYD5r9rwcAACAAAwMDAwMDAwNDABAAAAAAAAAAAAAAAAAAAAAAAAAPzfKXiFXFuO+teWsAEJ/rY+THfTgLdfOW0KgkiG2ood0XCadT4wTFk=";
+    nRv = MagicSE_EncData( pszSessionKey, (unsigned char*)pszDecString, (int)strlen(pszDecString), &pszEncString );
+    if( nRv != MAGICSE_OK ) {
+        [self FreeMSE];
+        return nil;
+    } else {
+        NSString *encStr = [NSString stringWithUTF8String: (char *)pszEncString];
+        NSLog(@"암호화 후 STR= %@", encStr);
+        return encStr;
+    }
+}
+
+-(NSString *) MSE_Dec:(NSString *)encStr
+{
+    NSString *session_key = [self MSE_Init];
+    
+    NSLog(@"암호화 전 STR= %@", encStr);
+    NSLog(@"Session Key= %@", session_key);
+    
+    pszSessionKey = (char *)[session_key UTF8String];
+    pszEncString = (char *)[encStr UTF8String];
+    
+    nRv = MagicSE_DecData( pszSessionKey, pszEncString, &pPlainText1, &nPlainTextLen1);
+    if( nRv != MAGICSE_OK ) {
+        [self FreeMSE];
+        return nil;
+    } else {
+        NSString *decStr = [NSString stringWithUTF8String: (char*)pPlainText1];
+        NSLog(@"복호화 후 STR= %@", decStr);
+        return decStr;
+    }
+}
+
+-(void) INN_Call_Seq:(NSString *)func_name
+{
+    NSLog(@"INN_Call_Seq");
+    
+        NSLog(progress_yn ? @"Yes" : @"No");
+//        sleep(10);
+        if(progress_yn == NO) {
+            if([func_name isEqualToString:@"SecurityCertificate"]) {[self INN_SecurityCertificate];}
+            else if([func_name isEqualToString:@"SecuritySessionKey"]) {[self INN_SecuritySessionKey];}
+            else if([func_name isEqualToString:@"SessionInitailize"]) {[self INN_SessionInitialize];}
+            
+            progress_yn = YES;
+//            break;
+        }
     
     
-    // 세션키를 만든다.
-    nRv = MagicSE_HandShakeSessionKey( pszServerCert, &pszSessionKey, pRootCert, sizeof(pRootCert) );
-    //printf( "MagicSE_HandShakeSessionKey : %d, %s\n", nRv, pszSessionKey );
-    if( nRv != MAGICSE_OK )	goto	Finally;
-    nRv = MagicSE_GetEncSessionKey( pszSessionKey, &pszEncSessionKey );
+    return;
+}
+
+//-(void) INN_Call_Seq:(NSString *)func_name
+//{
+//    NSLog(@"INN_Call_Seq");
+//    while(1) {
+//        NSLog(progress_yn ? @"Yes" : @"No");
+//        sleep(10);
+//        if(progress_yn == NO) {
+//            if([func_name isEqualToString:@"SecurityCertificate"]) {[self INN_SecurityCertificate];}
+//            else if([func_name isEqualToString:@"SecuritySessionKey"]) {[self INN_SecuritySessionKey];}
+//            else if([func_name isEqualToString:@"SessionInitailize"]) {[self INN_SessionInitialize];}
+//            
+//            progress_yn = YES;
+//            break;
+//        }
+//    }
+//    
+//    return;
+//}
+
+
+-(void) INN_MSE_Handshake
+{
+    NSLog(@"MAGIC_HANDSHAKE Start");
+    NSLog(@"SecurityCertificate Start");
+    [self INN_Call_Seq:@"SecurityCertificate"];
     
-    //printf( "MagicSE_GetEncSessionKey : %d, %s\n", nRv, pszEncSessionKey );
-    if( nRv != MAGICSE_OK )	goto	Finally;
-    
-    str = [NSString stringWithUTF8String: pszEncSessionKey];
-    
-    // 서버 인증서로 암호화된 세션키를 서버로 전송한다.
-    // send : pszEncSessionKey
-    
-    
-    // 세션키로 데이터를 암호화 한다.
-    //    nRv = MagicSE_MakeSessionKey( pszServerCert, &pszSessionKey );
-    //    printf( "MagicSE_MakeSessionKey : %d, %s\n", nRv, pszSessionKey );
-    //    if( nRv != MAGICSE_OK )	goto	Finally;
-    //    nRv = MagicSE_EncData( pszSessionKey, (unsigned char*)szPlainData1, strlen(szPlainData1), &pszEncData1 );
-    //    printf( "MagicSE_EncData1 : %d, %s\n", nRv, pszEncData1 );
-    //    if( nRv != MAGICSE_OK )	goto	Finally;
-    //
-    //
-    //
-    //    // 세션키로 암호화된 데이터를 서버로 전송한다.
-    //    // send : pszEncData1
-    //
-    //    // 서버로부터 암호화 데이터를 수신한다.
-    //    // recv : pszEncData1
-    //
-    //
-    //    // 세션키로 암호화 데이터를 복호화 한다.
-    //    nRv = MagicSE_DecData( pszSessionKey, pszEncData1, &pPlainText1, &nPlainTextLen1 );
-    //    printf( "MagicSE_DecData1 : %d, %s\n", nRv, (char*)pPlainText1 );
-    //    if( nRv != MAGICSE_OK )	goto	Finally;
-    //
-    //    // 세션키로 데이터를 암호화 한다.
-    //    nRv = MagicSE_MakeSessionKey( pszServerCert, &pszSessionKey );
-    //    printf( "MagicSE_MakeSessionKey : %d, %s\n", nRv, pszSessionKey );
-    //    if( nRv != MAGICSE_OK )	goto	Finally;
-    //    nRv = MagicSE_EncData( pszSessionKey, (unsigned char*)szPlainData2, strlen(szPlainData2), &pszEncData2 );
-    //    printf( "MagicSE_EncData2 : %d, %s\n", nRv, pszEncData2 );
-    //    if( nRv != MAGICSE_OK )	goto	Finally;
-    //
-    //
-    //    // 세션키로 암호화된 데이터를 서버로 전송한다.
-    //    // send : pszEncData2
-    //
-    //    // 서버로부터 암호화 데이터를 수신한다.
-    //    // recv : pszEncData2
-    //
-    //
-    //    // 세션키로 암호화 데이터를 복호화 한다.
-    //    nRv = MagicSE_DecData( pszSessionKey, pszEncData2, &pPlainText2, &nPlainTextLen2 );
-    //    printf( "MagicSE_DecData2 : %d, %s\n", nRv, (char*)pPlainText2 );
-    //    if( nRv != MAGICSE_OK )	goto	Finally;
-    
-Finally:
-    MagicSE_FreeData( (void**)&pPlainText1 );
-    MagicSE_FreeData( (void**)&pPlainText2 );
-    MagicSE_FreeData( (void**)&pszSessionKey );
-    MagicSE_FreeData( (void**)&pszEncSessionKey );
-    MagicSE_FreeData( (void**)&pszEncData1 );
-    MagicSE_FreeData( (void**)&pszEncData2 );
-    
-    return str;
+//    NSLog(@"SecuritySessionKey Start");
+//    [self INN_Call_Seq:@"SecuritySessionKey"];
+//    
+//    NSLog(@"SessionInitailize Start");
+//    [self INN_Call_Seq:@"SessionInitailize"];
 }
 
 
 
-void CASE_1( )
+-(void) INN_SecurityCertificate
 {
-    char 			szPlainData1[] = "This is test1", szPlainData2[] = "This is test2";
-    unsigned char	*pPlainText1 = 0x00, *pPlainText2 = 0x00;
-    char			szVersion[12] = {0, }, *pszServerCert = 0x00, *pszSessionKey = 0x00, *pszEncSessionKey = 0x00,
-    *pszEncData1 = 0x00, *pszEncData2 = 0x00;
-    int				nRv = 0, nPlainTextLen1 = 0, nPlainTextLen2 = 0;
+    NSLog(@"INN_SecurityCertificate");
+    HTTPClient *client = [HTTPClient sharedHTTPClient:nil];
+    [client setDelegate:client.delegate];
+    
+    [client serverAPICall:nil andURL:@"App-SecurityCertificate"];
+}
 
+-(void) INN_SecuritySessionKey
+{
+    NSString *security_certificate = [resultDict objectForKey:@"SECURITY_CERTIFICATE"];
+    jsession_id = [resultDict objectForKey:@"JSESSION_ID"];
+    NSLog(@"서버 인증서=%@", security_certificate);
+    pszServerCert = (char *)[security_certificate UTF8String];
     
-    // MagicSE 버전을 가져온다.
-    MagicSE_GetVersion( szVersion );
-    printf( "Version : %s\n", szVersion );
-    
-    
-    // 서버로부터 서버 인증서를 수신한다.
-    // recv : pszServerCert
-    pszServerCert = (char*)"000001288ZEACAQADAAAAAQAAMDAwMDAwODcxMIIDYzCCAkugAwIBAgIBAjANBgkqhkiG9w0BAQsFADBdMQswCQYDVQQGEwJLUjEWMBQGA1UECgwNRHJlYW1TZWN1cml0eTESMBAGA1UECwwJTWFnaWNTRXYyMSIwIAYDVQQDDBlEcmVhbVNlY3VyaXR5IHJvb3RDQSAyMDQ4MB4XDTEyMDMyMDA3MTAyM1oXDTIyMDMyMDA3MTAyM1oweTELMAkGA1UEBhMCa3IxFjAUBgNVBAoMDWRyZWFtc2VjdXJpdHkxGzAZBgNVBAsMEm1vYmlsZV9tYWdpY3NldjIuMDE1MDMGA1UEAwws6rWQ6rO867aA66qo67CU7J287Jik7ZS87Iqk6riw67CY6rWs7LaVXzIwNDgwggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQCyTsbYLTeLA/Gko6sTgxLjlfPr9YdeZTD5twNAqBQ40DVtsX1rG+uPHcILN9SmwM6dbLLvimeZvKTNH5z3SXOiFCM+bTm0WvaWpbaQozLPU4xlalhKisE61AL70AR5wtaZtVaBWj1s+/cYE0Z7LjSlhoBvkFowfov/BhhPJTEpc/qnRt2Wrb+4BrfDJayPRZQUJbJlUpPX3+ASHV7o0r3kfY9Dh2wPwyHP7x66EGWElt/sZdt38AGh1zh7bG9LG7ZmvIz9LDjhSoEtSFu9AncKwSRxNC+y9qal99ILcupUQW3KnS9CejI3B5TMzGtGON1L+O+v8+WefJV+l+ezApNhAgMBAAGjEjAQMA4GA1UdDwEB/wQEAwIFIDANBgkqhkiG9w0BAQsFAAOCAQEAvSsXwrJyZWwxBRXsZxGtTcG1xv2iwdmDQ0QHcSJEPNS2l/taykHEYkz7eyOeuT7YO4n/8Bovm11kUirSxS0PnTtU7KSTX7B9ik6of0BO8A0HiYWaUhLspnstp/qYTZ18NZ6lZFVzBs0s/lMLKZ+Nc6nEbjj+p/MMRmVXdt583/KiLjFspFX3M9W22vm7OaKXoRzjPXE7SHidR04fNo6wK9wwwcRZ4HALDCUZOSFBDsudvoDgDZOOFeO4XsP9WXIcArl2KBg8kFnbEIbHCkulKxL2ZMk1tJl3T9RiRZ+0e8qoasLostDrlG/s0ME+5gtcExfwafQgEqf7bYD5r9rwcAACAAAwMDAwMDAwNDABAAAAAAAAAAAAAAAAAAAAAAAAAPzfKXiFXFuO+teWsAEJ/rY+THfTgLdfOW0KgkiG2ood0XCadT4wTFk=";
-    
-    
-    // 세션키를 만든다.
     nRv = MagicSE_HandShakeSessionKey( pszServerCert, &pszSessionKey, pRootCert, sizeof(pRootCert) );
-    printf( "MagicSE_HandShakeSessionKey : %d, %s\n", nRv, pszSessionKey );
-    if( nRv != MAGICSE_OK )	goto	Finally;
     nRv = MagicSE_GetEncSessionKey( pszSessionKey, &pszEncSessionKey );
-    printf( "MagicSE_GetEncSessionKey : %d, %s\n", nRv, pszEncSessionKey );
-    if( nRv != MAGICSE_OK )	goto	Finally;
     
+    NSDictionary *nsDictionary = @{@"SECURITY_SESSION_KEY":[NSString stringWithUTF8String: (char *)pszEncSessionKey]};
+    HTTPClient *client = [HTTPClient sharedHTTPClient:jsession_id];
+    [client setDelegate:NSString.self];
+    [client serverAPICall:nsDictionary andURL:@"App-SecuritySessionKey"];
+}
+
+-(void) INN_SessionInitialize
+{
     
-    // 서버 인증서로 암호화된 세션키를 서버로 전송한다.
-    // send : pszEncSessionKey
+}
+
+-(void)HTTPClient:(HTTPClient *)sharedHTTPClient didSucceedWithResponse:(NSMutableDictionary *)responseObject
+{
+    NSLog(@"didSucceedWithResponse | ");
+    resultDict = nil;
+    resultDict = responseObject;
     
-    
-    // 세션키로 데이터를 암호화 한다.
-    nRv = MagicSE_MakeSessionKey( pszServerCert, &pszSessionKey );
-    printf( "MagicSE_MakeSessionKey : %d, %s\n", nRv, pszSessionKey );
-    if( nRv != MAGICSE_OK )	goto	Finally;
-    nRv = MagicSE_EncData( pszSessionKey, (unsigned char*)szPlainData1, strlen(szPlainData1), &pszEncData1 );
-    printf( "MagicSE_EncData1 : %d, %s\n", nRv, pszEncData1 );
-    if( nRv != MAGICSE_OK )	goto	Finally;
-    
-    
-    // 세션키로 암호화된 데이터를 서버로 전송한다.
-    // send : pszEncData1
-    
-    // 서버로부터 암호화 데이터를 수신한다.
-    // recv : pszEncData1
-    
-    
-    // 세션키로 암호화 데이터를 복호화 한다.
-    nRv = MagicSE_DecData( pszSessionKey, pszEncData1, &pPlainText1, &nPlainTextLen1 );
-    printf( "MagicSE_DecData1 : %d, %s\n", nRv, (char*)pPlainText1 );
-    if( nRv != MAGICSE_OK )	goto	Finally;
-    
-    // 세션키로 데이터를 암호화 한다.
-    nRv = MagicSE_MakeSessionKey( pszServerCert, &pszSessionKey );
-    printf( "MagicSE_MakeSessionKey : %d, %s\n", nRv, pszSessionKey );
-    if( nRv != MAGICSE_OK )	goto	Finally;
-    nRv = MagicSE_EncData( pszSessionKey, (unsigned char*)szPlainData2, strlen(szPlainData2), &pszEncData2 );
-    printf( "MagicSE_EncData2 : %d, %s\n", nRv, pszEncData2 );
-    if( nRv != MAGICSE_OK )	goto	Finally;
-    
-    
-    // 세션키로 암호화된 데이터를 서버로 전송한다.
-    // send : pszEncData2
-    
-    // 서버로부터 암호화 데이터를 수신한다.
-    // recv : pszEncData2
-    
-    
-    // 세션키로 암호화 데이터를 복호화 한다.
-    nRv = MagicSE_DecData( pszSessionKey, pszEncData2, &pPlainText2, &nPlainTextLen2 );
-    printf( "MagicSE_DecData2 : %d, %s\n", nRv, (char*)pPlainText2 );
-    if( nRv != MAGICSE_OK )	goto	Finally;
-    
-Finally:
-    MagicSE_FreeData( (void**)&pPlainText1 );
-    MagicSE_FreeData( (void**)&pPlainText2 );
+    progress_yn = NO;
+}
+
+-(void)HTTPClient:(HTTPClient *)sharedHTTPClient didFailWithError:(NSError *)error
+{
+    NSLog(@"didFailWithError");
+    progress_yn = NO;
+}
+
+-(void) FreeMSE
+{
     MagicSE_FreeData( (void**)&pszSessionKey );
     MagicSE_FreeData( (void**)&pszEncSessionKey );
-    MagicSE_FreeData( (void**)&pszEncData1 );
-    MagicSE_FreeData( (void**)&pszEncData2 );
+    MagicSE_FreeData( (void**)&pszEncString );
+    MagicSE_FreeData( (void**)&pszDecString );
 }
+
 
 
 

@@ -15,7 +15,7 @@
 
 @property(nonatomic, weak) id<HTTPClientDelegate>delegate;
 
-+(HTTPClient *)sharedHTTPClient;                                   // HTTPClient 객체 초기화(Singleton)
++(HTTPClient *)sharedHTTPClient:(NSString *)jsessionid;                                   // HTTPClient 객체 초기화(Singleton)
 -(instancetype)initWithBaseURL:(NSURL *)url;                       // HTTPClient 객체 초기화 시 사용하는 메서드로 url 세팅 - 미사용
 -(void)serverAPICall:(NSDictionary *)parameters andURL:(NSString *)api_type;  // HTTP Request 하는 부분
 
