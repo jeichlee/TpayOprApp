@@ -7,8 +7,13 @@
 //
 
 #import "LisenceSearchView.h"
+#import "CommonHeader.h"
 
 @interface LisenceSearchView ()
+{
+    @private
+    CommonHeader *cHeader;
+}
 
 @end
 
@@ -19,14 +24,19 @@
 -(void)send:(UIView *) header{
     NSLog(@"[LisenceSearch API call]");
     
+    cHeader = (CommonHeader *)header;
     NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
     
     [params setObject:mdnVal.text forKey:@"MDN"];
+    
+    // 사용자가 설정한 URL로 변경한다.
+    [HTTPClient setBaseURL: cHeader.serverHost];
     
     HTTPClient *client = [HTTPClient sharedHTTPClient];
     [client setDelegate:self];
     [client serverAPICall:params andURL:@"App-LisenceSearch"];
     
+    NSLog(@"[LisenceSearch API end]");
     
 }
 
@@ -67,5 +77,6 @@
                                           otherButtonTitles:nil];
     [alert show];
 }
+
 
 @end

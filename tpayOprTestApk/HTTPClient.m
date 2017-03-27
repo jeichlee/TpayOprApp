@@ -76,10 +76,22 @@ static NSString *baseURL = @"http://61.250.22.44:8001/app/handler/";
 {
     //todo: 위 baseURL을 Const로 선언하고 url 조합을 하고 싶은데 안된다...
     NSString *url = [baseURL stringByAppendingString:api_type];
-    UIView *progressBackground = [(UIViewController *)self.delegate view];
+    
+    UIView *progressBackground = [[UIView alloc] init];
+    if ([self.delegate isKindOfClass:[UIViewController class]] == 1){
+        progressBackground = [(UIViewController *)self.delegate view];
+    }else {
+        progressBackground = (UIView *)self.delegate;
+    }
+    
     [MBProgressHUD showHUDAddedTo:progressBackground animated:YES];
     //todo: Deprecated된 부분을 현행화 해야 함...
     [self POST:url parameters:parameters  success:[self successBlock:progressBackground] failure:[self failBlock:progressBackground]];
+}
+
+// baseURL 변경처리
++(void)setBaseURL:(NSString *)url{
+    baseURL = url;
 }
 
 @end

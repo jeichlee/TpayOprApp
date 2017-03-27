@@ -60,4 +60,15 @@
     
 }
 
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    [dpServerType getTextField].userInteractionEnabled = YES;
+    [[dpServerType getTextField] resignFirstResponder]; //hides the pickerView
+    
+    [dpMDN getTextField].userInteractionEnabled = YES;
+    [[dpMDN getTextField] resignFirstResponder]; //hides the pickerView
+    
+    [self endEditing:YES];
+}
+
 @end
