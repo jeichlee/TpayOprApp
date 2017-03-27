@@ -34,6 +34,7 @@
     
     HTTPClient *client = [HTTPClient sharedHTTPClient];
     [client setDelegate:self];
+    
     [client serverAPICall:params andURL:@"App-LisenceSearch"];
     
     NSLog(@"[LisenceSearch API end]");
@@ -77,6 +78,5 @@
                                           otherButtonTitles:nil];
     [alert show];
 }
-
 
 @end

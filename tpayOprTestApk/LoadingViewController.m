@@ -29,22 +29,10 @@
     [super viewDidLoad];
     [self testProgress:0.00];
     
-    NSString *kk       = @"";
-   // NSString *outParam = @"";
     
-    //[kk CASE_1];
-    
-    NSString *encParam = [kk MAGIC_ENC:@"hello world!!"];
-    //NSLog(@" MAGIC_ENC OUTPUT : %@", encParam );
-    NSString *decParam = [kk  MAGIC_DEC:encParam];
-    NSLog(@" MAGIC_DEC OUTPUT : %@", decParam );
-    
-    
-    
-    /*HTTPClient *client = [HTTPClient sharedHTTPClient];
+    HTTPClient *client = [HTTPClient sharedHTTPClient];
     [client setDelegate:self];
     [client serverAPICall:nil andURL:@"App-MDNSearchForOpr"];
-     */
     
 }
 

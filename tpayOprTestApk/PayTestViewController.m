@@ -72,6 +72,11 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    [dp getTextField].userInteractionEnabled = YES;
+    [[dp getTextField] resignFirstResponder]; //hides the pickerView
+}
 
 
 @end
