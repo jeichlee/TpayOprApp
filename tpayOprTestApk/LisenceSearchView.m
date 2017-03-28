@@ -19,7 +19,7 @@
 
 @implementation LisenceSearchView
 
-@synthesize mdnVal, resultView;
+@synthesize resultView;
 
 -(void)send:(UIView *) header{
     NSLog(@"[LisenceSearch API call]");
@@ -53,13 +53,13 @@
     NSDictionary *header = (NSDictionary *)[responseObject objectForKey:@"header"];
     NSDictionary *body = (NSDictionary *)[responseObject objectForKey:@"body"];
     
+    NSLog(@"HEADER %@", header);
+    NSLog(@"BODY %@", body);
+    
     if(![body isEqual:@""] && [[body objectForKey:@"RESULT_CODE"] isEqualToString:@"0"])
     {
         //LisenceSearch 성공
         NSLog(@"[LisenceSearch 성공]");
-        
-        NSLog(@"HEADER %@", header);
-        NSLog(@"BODY %@", body);
         
         //결과 표시
         resultView.text = (NSString *)body;

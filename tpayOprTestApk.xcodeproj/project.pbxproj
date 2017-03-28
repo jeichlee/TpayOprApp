@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		62F0504F1E8A3F9700697067 /* CommonMessageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 62F0504E1E8A3F9700697067 /* CommonMessageView.m */; };
 		62F5A45D1E7A782C00F06F5D /* CommonHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 62F5A45C1E7A782C00F06F5D /* CommonHeader.m */; };
 		62F5A45F1E7A812100F06F5D /* common.plist in Resources */ = {isa = PBXBuildFile; fileRef = 62F5A45E1E7A812100F06F5D /* common.plist */; };
 		62F5A4631E7A872500F06F5D /* NSString+Common.m in Sources */ = {isa = PBXBuildFile; fileRef = 62F5A4621E7A872500F06F5D /* NSString+Common.m */; };
@@ -154,6 +155,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		62F0504E1E8A3F9700697067 /* CommonMessageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommonMessageView.m; sourceTree = "<group>"; };
+		62F050501E8A3FA200697067 /* CommonMessageView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommonMessageView.h; sourceTree = "<group>"; };
 		62F5A45B1E7A782000F06F5D /* CommonHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommonHeader.h; sourceTree = "<group>"; };
 		62F5A45C1E7A782C00F06F5D /* CommonHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommonHeader.m; sourceTree = "<group>"; };
 		62F5A45E1E7A812100F06F5D /* common.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = common.plist; sourceTree = "<group>"; };
@@ -391,6 +394,8 @@
 			children = (
 				62F5A4AF1E8247B500F06F5D /* LisenceSearchView.h */,
 				62F5A4B01E82481800F06F5D /* LisenceSearchView.m */,
+				62F0504E1E8A3F9700697067 /* CommonMessageView.m */,
+				62F050501E8A3FA200697067 /* CommonMessageView.h */,
 			);
 			name = app;
 			sourceTree = "<group>";
@@ -930,6 +935,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				62F5A4681E7FFD7B00F06F5D /* AFHTTPSessionManager.h in Sources */,
+				62F0504F1E8A3F9700697067 /* CommonMessageView.m in Sources */,
 				62F5A4AA1E80ED9D00F06F5D /* UserInfo.m in Sources */,
 				62F5A4691E7FFD7B00F06F5D /* AFNetworkReachabilityManager.h in Sources */,
 				62F5A46A1E7FFD7B00F06F5D /* AFSecurityPolicy.h in Sources */,

@@ -91,9 +91,9 @@ static NSString *baseURL = @"http://61.250.22.44:8001/app/handler/";
 // HTTP Request 하는 부분
 -(void)serverAPICall:(NSDictionary *)parameters andURL:(NSString *)api_type
 {
-    NSLog(@"serverAPICall | api_type=%@", api_type);
     //todo: 위 baseURL을 Const로 선언하고 url 조합을 하고 싶은데 안된다...
     NSString *url = [baseURL stringByAppendingString:api_type];
+    NSLog(@"serverAPICall | url=%@", url);
     
     UIView *progressBackground = [[UIView alloc] init];
     if ([self.delegate isKindOfClass:[UIViewController class]] == 1){

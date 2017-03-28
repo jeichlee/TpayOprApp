@@ -10,6 +10,7 @@
 #import "DownPicker.h"
 
 #import "LisenceSearchView.h"
+#import "CommonMessageView.h"
 
 @interface AppTestViewController : UIViewController
 
@@ -19,6 +20,8 @@
 @property (strong, nonatomic) IBOutlet UIView *header;
 
 @property (strong, nonatomic) IBOutlet UIView *lisenceSearch;
+@property (strong, nonatomic) IBOutlet UIView *commonMessage;
+
 
 -(IBAction) send:(id)sender;
 -(IBAction) changeAPI:(id)sender;

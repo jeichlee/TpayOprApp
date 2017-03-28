@@ -17,7 +17,7 @@
 
 @synthesize dp, selector, header, container;
 
-@synthesize lisenceSearch;
+@synthesize lisenceSearch, commonMessage;
 
 
 - (void)viewDidLoad {
@@ -29,6 +29,7 @@
     
     // API 목록 관리
     [bandArray addObject:@"LisenceSearch"];
+    [bandArray addObject:@"CommonMessage"];
     
     dp = [[DownPicker alloc] initWithTextField:selector withData:bandArray];
     
@@ -54,6 +55,9 @@
     if([str isEqualToString:@"LisenceSearch"] == YES){
         [lisenceSearch setFrame: containerSize];
         [self.container addSubview:lisenceSearch];
+    }else if ([str isEqualToString:@"CommonMessage"] == YES){
+        [commonMessage setFrame: containerSize];
+        [self.container addSubview:commonMessage];
     }else{
         
     }
