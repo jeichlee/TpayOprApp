@@ -35,7 +35,6 @@
 		62F5A47D1E7FFD7B00F06F5D /* UIRefreshControl+AFNetworking.h in Sources */ = {isa = PBXBuildFile; fileRef = EFC9C4901E7595B9006378CD /* UIRefreshControl+AFNetworking.h */; };
 		62F5A47E1E7FFD7B00F06F5D /* UIRefreshControl+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = EFC9C4911E7595B9006378CD /* UIRefreshControl+AFNetworking.m */; };
 		62F5A47F1E7FFD7B00F06F5D /* UIWebView+AFNetworking.h in Sources */ = {isa = PBXBuildFile; fileRef = EFC9C4921E7595B9006378CD /* UIWebView+AFNetworking.h */; };
-		62F5A4A11E800E4700F06F5D /* NSString+MagicSEUtil.mm in Sources */ = {isa = PBXBuildFile; fileRef = 62F5A4A01E800E4700F06F5D /* NSString+MagicSEUtil.mm */; };
 		62F5A4A61E800E5800F06F5D /* libMagicSEV2.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 62F5A4A21E800E5800F06F5D /* libMagicSEV2.0.a */; };
 		62F5A4A71E800E5800F06F5D /* libWDSTKI30_LIB.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 62F5A4A31E800E5800F06F5D /* libWDSTKI30_LIB.a */; };
 		62F5A4AA1E80ED9D00F06F5D /* UserInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 62F5A4A91E80ED9D00F06F5D /* UserInfo.m */; };
@@ -160,8 +159,6 @@
 		62F5A45E1E7A812100F06F5D /* common.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = common.plist; sourceTree = "<group>"; };
 		62F5A4611E7A86E200F06F5D /* NSString+Common.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSString+Common.h"; sourceTree = "<group>"; };
 		62F5A4621E7A872500F06F5D /* NSString+Common.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Common.m"; sourceTree = "<group>"; };
-		62F5A49F1E800E4700F06F5D /* NSString+MagicSEUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+MagicSEUtil.h"; sourceTree = "<group>"; };
-		62F5A4A01E800E4700F06F5D /* NSString+MagicSEUtil.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = "NSString+MagicSEUtil.mm"; sourceTree = "<group>"; };
 		62F5A4A21E800E5800F06F5D /* libMagicSEV2.0.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libMagicSEV2.0.a; sourceTree = "<group>"; };
 		62F5A4A31E800E5800F06F5D /* libWDSTKI30_LIB.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libWDSTKI30_LIB.a; sourceTree = "<group>"; };
 		62F5A4A41E800E5800F06F5D /* MagicSE2_Error.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MagicSE2_Error.h; sourceTree = "<group>"; };
@@ -383,8 +380,6 @@
 		62F5A4801E800DE200F06F5D /* MagicSEUtil */ = {
 			isa = PBXGroup;
 			children = (
-				62F5A49F1E800E4700F06F5D /* NSString+MagicSEUtil.h */,
-				62F5A4A01E800E4700F06F5D /* NSString+MagicSEUtil.mm */,
 				EFCFC3211E885402005A7D49 /* MagicSEUtil.h */,
 				EFCFC3221E885402005A7D49 /* MagicSEUtil.m */,
 			);
@@ -978,7 +973,6 @@
 				62F8B7CA1E6FE61E00EA70F3 /* UIDownPicker.m in Sources */,
 				EFC9C4181E6ED997006378CD /* main.m in Sources */,
 				EFC9C4DD1E7A78D5006378CD /* MBProgressHUD.m in Sources */,
-				62F5A4A11E800E4700F06F5D /* NSString+MagicSEUtil.mm in Sources */,
 				EFC9C4971E7595B9006378CD /* AFURLRequestSerialization.m in Sources */,
 				EFC9C49A1E7595B9006378CD /* AFAutoPurgingImageCache.m in Sources */,
 				EFC9C49D1E7595B9006378CD /* UIActivityIndicatorView+AFNetworking.m in Sources */,

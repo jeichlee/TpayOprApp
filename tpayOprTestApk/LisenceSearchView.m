@@ -27,13 +27,15 @@
     cHeader = (CommonHeader *)header;
     NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
     
-    [params setObject:mdnVal.text forKey:@"MDN"];
+    [params setObject:cHeader.mdn forKey:@"MDN"];
     
     // 사용자가 설정한 URL로 변경한다.
     [HTTPClient setBaseURL: cHeader.serverHost];
     
     HTTPClient *client = [HTTPClient sharedHTTPClient:nil];
     [client setDelegate:self];
+    
+    NSLog(@"params : %@", params);
     
     [client serverAPICall:params andURL:@"App-LisenceSearch"];
     
@@ -44,17 +46,23 @@
 
 -(void)HTTPClient:(HTTPClient *)sharedHTTPClient didSucceedWithResponse:(id)responseObject
 {
-    NSMutableDictionary *dir = [NSJSONSerialization JSONObjectWithData:responseObject options:0 error:nil];
-    NSLog(@"%@", dir);
+//    NSMutableDictionary *dir = [NSJSONSerialization JSONObjectWithData:responseObject options:0 error:nil];
+//    NSLog(@"%@", dir);
     //todo: header값을 못불러 오겠다...
     
-    if([[dir objectForKey:@"RESULT_CODE"] isEqualToString:@"0"])
+    NSDictionary *header = (NSDictionary *)[responseObject objectForKey:@"header"];
+    NSDictionary *body = (NSDictionary *)[responseObject objectForKey:@"body"];
+    
+    if(![body isEqual:@""] && [[body objectForKey:@"RESULT_CODE"] isEqualToString:@"0"])
     {
         //LisenceSearch 성공
         NSLog(@"[LisenceSearch 성공]");
         
+        NSLog(@"HEADER %@", header);
+        NSLog(@"BODY %@", body);
+        
         //결과 표시
-        resultView.text = (NSString *)dir;
+        resultView.text = (NSString *)body;
         
     } else {
         

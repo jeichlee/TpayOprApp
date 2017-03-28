@@ -10,7 +10,6 @@
 #import "AppTestViewController.h"
 #import "AFNetworking.h"
 #import "HTTPClient.h"
-#import "NSString+MagicSEUtil.h"
 #import "MagicSEUtil.h"
 #import "UserInfo.h"
 
@@ -81,7 +80,7 @@
         [UserInfo setUserMdn:[body objectForKey:@"MDN"]];
 
         
-        MagicSEUtilTest *util = [[MagicSEUtilTest alloc] init];
+        MagicSEUtil *util = [[MagicSEUtil alloc] init];
         [util INN_SecurityCertificate];
         
         

@@ -10,13 +10,13 @@
 #import "HTTPClient.h"
 #import "UserInfo.h"
 
-@interface MagicSEUtilTest()
+@interface MagicSEUtil()
 {
     char callType; // 'C' : SecurityCertificate, 'I' : SessionInitialize
 }
 @end
 
-@implementation MagicSEUtilTest
+@implementation MagicSEUtil
 
 //@synthesize delegate;
 //@synthesize didSucceedWithResponse;

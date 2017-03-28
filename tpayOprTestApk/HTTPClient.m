@@ -55,7 +55,11 @@ static NSString *baseURL = @"http://61.250.22.44:8001/app/handler/";
         NSDictionary *body = [NSJSONSerialization JSONObjectWithData:responseObject options:1 error:nil];
         NSMutableDictionary *responseHeaderAndBody = [[NSMutableDictionary alloc]init];
         [responseHeaderAndBody setObject:header forKey:@"header"];
-        [responseHeaderAndBody setObject:body forKey:@"body"];
+        if(body != nil){
+            [responseHeaderAndBody setObject:body forKey:@"body"];
+        }else{
+            [responseHeaderAndBody setObject:@"" forKey:@"body"];
+        }
         
         if([self.delegate respondsToSelector:@selector(HTTPClient:didSucceedWithResponse:)]) {
             [self.delegate HTTPClient:self didSucceedWithResponse:responseHeaderAndBody];

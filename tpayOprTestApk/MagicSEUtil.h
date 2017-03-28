@@ -10,7 +10,7 @@
 #import "HTTPClient.h"
 #import <UIKit/UIKit.h>
 
-@interface MagicSEUtilTest : UIView <HTTPClientDelegate>
+@interface MagicSEUtil : UIView <HTTPClientDelegate>
 
 //@property(strong, nonatomic) id<HTTPClientDelegate> delegate;
 //@property(nonatomic, copy) void (^didSucceedWithResponse)(NSMutableDictionary *);
