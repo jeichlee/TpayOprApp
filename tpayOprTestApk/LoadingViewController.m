@@ -58,30 +58,32 @@
 }
 
 
--(void)HTTPClient:(HTTPClient *)sharedHTTPClient didSucceedWithResponse:(NSMutableDictionary *)responseObject
+-(void)HTTPClient:(HTTPClient *)sharedHTTPClient didSucceedWithResponse:(NSMutableDictionary *)responseObject andApi:apiType
 {
     NSLog(@"didSucceedWithResponse | LoadingViewController");
     [self testProgress:0.50];
-//    NSLog(@"###%@", responseObject);
-//    NSLog(@"###%@", [responseObject objectForKey:@"Header"]);
     
     NSDictionary *header = (NSDictionary *)[responseObject objectForKey:@"header"];
     NSDictionary *body = (NSDictionary *)[responseObject objectForKey:@"body"];
     NSLog(@"HEADER %@", header);
     NSLog(@"BODY %@", body);
     
+    [UserInfo setJsessionId:[header objectForKey:@"Set-Cookie"]];
+    
     if([[body objectForKey:@"RESULT_CODE"] isEqualToString:@"0"])
     {
         //MDNSearch성공 - MDN 기준으로 MDNSearchForOpr 처리시작
         NSLog(@"[MDNSearchForOpr 성공] MDN=%@", [body objectForKey:@"MDN"]);
+        //로그인 사용자 회선 Setting
+        [UserInfo setUserMdn:[body objectForKey:@"MDN"]];
         [self testProgress:1.00];
         
-        UserInfo *user = [[UserInfo alloc] init];
-        [UserInfo setUserMdn:[body objectForKey:@"MDN"]];
-
-        
         MagicSEUtil *util = [[MagicSEUtil alloc] init];
-        [util INN_SecurityCertificate];
+        NSLog(@"[MAGICSE TEST] Test STR");
+        NSString *enc_str = [util MSE_Enc:@"TEST STR"];
+        //        NSLog(@"[MAGICSE TEST] ENC_STR=%@",enc_str);
+        //        NSString *dec_str = [util MSE_Dec:enc_str];
+        //        NSLog(@"[MAGICSE TEST] DEC_STR=%@",dec_str);
         
         
         //Page 이동
@@ -93,10 +95,10 @@
         //MDNSearchForOpr 실패
         //todo: Deprecated 현행화 해야 함
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"로그인 실패"
-                                                  message:@"인가되지 않은 사용자입니다. 앱을 종료 합니다"
-                                                  delegate:self
-                                                  cancelButtonTitle:@"확인"
-                                                  otherButtonTitles:nil];
+                                                        message:@"인가되지 않은 사용자입니다. 앱을 종료 합니다"
+                                                       delegate:self
+                                              cancelButtonTitle:@"확인"
+                                              otherButtonTitles:nil];
         [alert show];
         exit(0); //팝업 후 프로그램 종료
     }

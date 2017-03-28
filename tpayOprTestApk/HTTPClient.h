@@ -26,7 +26,7 @@
 @protocol HTTPClientDelegate <NSObject>
 
 @optional
--(void)HTTPClient:(HTTPClient *)sharedHTTPClient didSucceedWithResponse:(id)responseObject;
+-(void)HTTPClient:(HTTPClient *)sharedHTTPClient didSucceedWithResponse:(id)responseObject andApi:apiType;
 -(void)HTTPClient:(HTTPClient *)sharedHTTPClient didSucceedWithOperations:(NSArray *)operations;
 -(void)HTTPClient:(HTTPClient *)sharedHTTPClient didFailWithError:(NSError *)error;
 

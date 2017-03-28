@@ -26,9 +26,9 @@ static NSString *baseURL = @"http://61.250.22.44:8001/app/handler/";
         _sharedHTTPClient.responseSerializer = [AFHTTPResponseSerializer serializer];
         [_sharedHTTPClient.requestSerializer setValue:@"_JSON_MESSAGE_" forHTTPHeaderField:@"_X2_IDENTIFIER_KEY_"];
         [_sharedHTTPClient.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
-//        if(jsessionid != nil) {
-//            [_sharedHTTPClient.requestSerializer setValue:@"JSessionID" forHTTPHeaderField:jsessionid];
-//        }
+        if(jsessionid != nil) {
+            [_sharedHTTPClient.requestSerializer setValue:@"Set-Cookie" forHTTPHeaderField:jsessionid];
+        }
     });
     return _sharedHTTPClient;
 }
@@ -48,21 +48,19 @@ static NSString *baseURL = @"http://61.250.22.44:8001/app/handler/";
 
 
 // HTTP 요청에 대한 응답 콜백을 HTTPClient Delegate에게 포워딩(Success시) - 해당 이벤트 시 구현은 각 viewController에서 구현
--(void (^)(NSURLSessionDataTask *task, id responseObject))successBlock:progressBackground {
+-(void (^)(NSURLSessionDataTask *task, id responseObject))successBlock:progressBackground andApi:apiType {
     return ^(NSURLSessionDataTask *task, id responseObject){
         NSHTTPURLResponse *response = ((NSHTTPURLResponse *)[task response]);
         NSDictionary *header = [response allHeaderFields];
         NSDictionary *body = [NSJSONSerialization JSONObjectWithData:responseObject options:1 error:nil];
         NSMutableDictionary *responseHeaderAndBody = [[NSMutableDictionary alloc]init];
         [responseHeaderAndBody setObject:header forKey:@"header"];
-        if(body != nil){
-            [responseHeaderAndBody setObject:body forKey:@"body"];
-        }else{
-            [responseHeaderAndBody setObject:@"" forKey:@"body"];
-        }
+        [responseHeaderAndBody setObject:body forKey:@"body"];
         
-        if([self.delegate respondsToSelector:@selector(HTTPClient:didSucceedWithResponse:)]) {
-            [self.delegate HTTPClient:self didSucceedWithResponse:responseHeaderAndBody];
+        NSLog(@"%@", responseHeaderAndBody);
+        
+        if([self.delegate respondsToSelector:@selector(HTTPClient:didSucceedWithResponse:andApi:)]) {
+            [self.delegate HTTPClient:self didSucceedWithResponse:responseHeaderAndBody andApi:apiType];
         } else {
             NSLog(@"Delegate do not response success service");
         }
@@ -91,9 +89,9 @@ static NSString *baseURL = @"http://61.250.22.44:8001/app/handler/";
 // HTTP Request 하는 부분
 -(void)serverAPICall:(NSDictionary *)parameters andURL:(NSString *)api_type
 {
+    NSLog(@"serverAPICall | api_type=%@", api_type);
     //todo: 위 baseURL을 Const로 선언하고 url 조합을 하고 싶은데 안된다...
     NSString *url = [baseURL stringByAppendingString:api_type];
-    NSLog(@"serverAPICall | url=%@", url);
     
     UIView *progressBackground = [[UIView alloc] init];
     if ([self.delegate isKindOfClass:[UIViewController class]] == 1){
@@ -106,7 +104,9 @@ static NSString *baseURL = @"http://61.250.22.44:8001/app/handler/";
     
     [MBProgressHUD showHUDAddedTo:progressBackground animated:YES];
     //todo: Deprecated된 부분을 현행화 해야 함...
-    [self POST:url parameters:parameters  success:[self successBlock:progressBackground] failure:[self failBlock:progressBackground]];
+    //    [self POST:url parameters:parameters  success:[self successBlock:progressBackground] failure:[self failBlock:progressBackground]];
+    
+    [self POST:url parameters:parameters progress:nil success:[self successBlock:progressBackground andApi:api_type] failure:[self failBlock:progressBackground]];
 }
 
 // baseURL 변경처리

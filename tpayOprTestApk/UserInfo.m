@@ -7,6 +7,7 @@
 //
 
 #import <UserInfo.h>
+#import "HTTPClient.h"
 
 @interface UserInfo ()
 @end
@@ -15,140 +16,94 @@
 @implementation UserInfo
 
 
--(UserInfo *) init{
-    if(userMdnArray == nil || userMdnArray.count <= 0){
-        userMdnArray = [[NSMutableArray alloc] init];
-    }
-    
-    if(userDeviceId == nil || [userDeviceId isEqual: @""]){
-        userDeviceId = [[NSString alloc] init];
-    }
-    
-    if(securetyCert == nil || [securetyCert isEqual: @""]){
-        securetyCert = [[NSString alloc] init];
-    }
-    
-    return self;
+
+
++(NSString *) getUserMdn
+{
+    return mdn;
 }
 
-/* ********************************************
- 첫 번째 전화번호 1개를 반환한다.
-******************************************** */
-+(NSString *) getUserMdn{
-    if(userMdnArray.count <= 0){
-        return nil;
-    }
-    
-    return [userMdnArray firstObject];
-}
-
-/* ********************************************
- 특정 Index 전화번호 1개를 반환한다.
- ******************************************** */
-+(NSString *) getUserMdn:(int) index{
-    if(userMdnArray.count <= 0){
-        return nil;
-    }
-    
-    return [userMdnArray objectAtIndex:index];
-}
-
-/* ********************************************
- 전체 전화번호를 반환한다.
- ******************************************** */
-+(NSMutableArray *) getUserAllMdn{
-    if(userMdnArray.count <= 0){
-        return nil;
-    }
-    
++(NSMutableArray *) getUserAllMdn
+{
     return userMdnArray;
 }
 
-/* ********************************************
- DeviceID 를 반환한다.
- ******************************************** */
-+(NSString *) getUserDeviceId{
++(NSString *) getUserDeviceId
+{
     return userDeviceId;
 }
 
-
-/* ********************************************
- 전화번호를 추가한다.
- ******************************************** */
-+(void) setUserMdn:(NSString *)mdn{
-    [userMdnArray addObject:mdn];
++(NSString *) getServerCerificate
+{
+    return serverCertificate;
 }
 
-
-/* ********************************************
- DeviceId 를 지정한다.
- ******************************************** */
-+(void) setUserDeviceId:(NSString *)deviceId{
-    userDeviceId = deviceId;
-}
-
-
-/* ********************************************
- 특정 index 혹은, 특정 mdn을 삭제한다.
- ******************************************** */
-+(BOOL) removeUserMdn:(int) index targetMdn:(NSString *)mdn{
-    if(userMdnArray.count <= 0){
-        return NO;
-    }
-    
-    // index 로 지우는 경우
-    if(mdn == nil || [mdn isEqual:@""]){
-        index = (index < 0 ? 0 : index);
-        
-        [userMdnArray removeObjectAtIndex:index];
-    }
-    // MDN 으로 지우는 경우
-    else{
-        [userMdnArray removeObject:mdn];
-    }
-    
-    return YES;
-}
-
-/* ********************************************
- 전체 MDN을 삭제한다.
- ******************************************** */
-+(BOOL) removeUserAllMdn{
-    if(userMdnArray.count <= 0){
-        return NO;
-    }
-    
-    userMdnArray = [[NSMutableArray alloc] init];
-    
-    return YES;
-}
-
-/* ********************************************
- securetyCertificate 정보를 세팅한다.
- ******************************************** */
-+(void) setSecurityCert:(NSString *)cert{
-    securetyCert = cert;
-}
-
-/* ********************************************
- securetyCertificate 정보를 가져온다.
- ******************************************** */
-+(NSString *) getSecurityCert{
-    return securetyCert;
-}
-
-/* ********************************************
- securetyCertificate 정보를 세팅한다.
- ******************************************** */
-+(void) setJsessionId:(NSString *)session{
-    jsessionId = session;
-}
-
-/* ********************************************
- securetyCertificate 정보를 가져온다.
- ******************************************** */
-+(NSString *) getJsessionId{
++(NSString *) getJsessionId
+{
     return jsessionId;
+}
+
++(NSString *) getMseSessionKey
+{
+    return mseSessionKey;
+}
+
++(NSString *)       getNfilterPublicKey
+{
+    return nfilterPublicKey;
+}
+
++(NSString *) getServerSessionId
+{
+    return serverSessionId;
+}
+
+
+
++(void) setUserMdn:(NSString *)_mdn
+{
+    NSLog(@"setUserMdn=%@",_mdn);
+    mdn = _mdn;
+}
+
++(void) setServerCertificate:(NSString *)_cert
+{
+    NSLog(@"setServerCertificate=%@",_cert);
+    serverCertificate = _cert;
+}
+
++(void) setJsessionId:(NSString *)_session
+{
+    NSLog(@"setJsessionId=%@",_session);
+    jsessionId = _session;
+}
+
++(void) setUserDeviceId:(NSString *)_deviceId
+{
+    NSLog(@"setUserDeviceId=%@",_deviceId);
+    userDeviceId = _deviceId;
+}
+
++(void) setMseSessionKey:(NSString *)_mseSessionKey
+{
+    NSLog(@"setMseSessionKey=%@",_mseSessionKey);
+    mseSessionKey = _mseSessionKey;
+}
+
++(void) setNfilterPublicKey:(NSString *)_nfilterPublicKey
+{
+    NSLog(@"setNfilterPublicKey=%@",_nfilterPublicKey);
+    nfilterPublicKey = _nfilterPublicKey;
+}
+
++(void) freeExpiredInfo
+{
+    
+}
+
++(void) setServerSessionId:(NSString *)_serverSessionId
+{
+    serverSessionId = _serverSessionId;
 }
 
 @end

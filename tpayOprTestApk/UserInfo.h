@@ -11,25 +11,38 @@
 #import <Foundation/Foundation.h>
 
 static NSMutableArray *userMdnArray;
+static NSString *mdn;
 static NSString *userDeviceId;
-static NSString *securetyCert;
+static NSString *serverCertificate;
+static NSString *mseSessionKey;
 static NSString *jsessionId;
+static NSString *nfilterPublicKey;
+static NSString *serverSessionId;
+
+
 
 @interface UserInfo : NSObject
 
-+(NSString *) getUserMdn;
-+(NSString *) getUserMdn:(int) index;
++(NSString *)       getUserMdn;
 +(NSMutableArray *) getUserAllMdn;
-+(NSString *) getUserDeviceId;
-+(NSString *) getSecurityCert;
-+(NSString *) getJsessionId;
++(NSString *)       getUserDeviceId;
++(NSString *)       getServerCerificate;
++(NSString *)       getJsessionId;
++(NSString *)       getMseSessionKey;
++(NSString *)       getNfilterPublicKey;
++(NSString *)       getServerSessionId;
 
-+(void) setUserMdn:(NSString *)mdn;
-+(void) setSecurityCert:(NSString *)cert;
-+(void) setJsessionId:(NSString *)session;
-+(void) setUserDeviceId:(NSString *)deviceId;
 
-+(BOOL) removeUserMdn:(int) index targetMdn:(NSString *)mdn;
-+(BOOL) removeUserAllMdn;
++(void) setUserMdn:(NSString *)_mdn;
++(void) setServerCertificate:(NSString *)_cert;
++(void) setJsessionId:(NSString *)_session;
++(void) setUserDeviceId:(NSString *)_deviceId;
++(void) setMseSessionKey:(NSString *)_mseSessionKey;
++(void) setNfilterPublicKey:(NSString *)_nfilterPublicKey;
++(void) setServerSessionId:(NSString *)_serverSessionId;
+
+// SessionExpired시 모두 초기화
++(void) freeExpiredInfo;
+
 
 @end
